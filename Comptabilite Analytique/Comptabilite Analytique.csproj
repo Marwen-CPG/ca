@@ -56,6 +56,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -174,8 +176,30 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ATELIER.cs" />
+    <Compile Include="Models\CLE_REPARTITION_FIXE.cs" />
+    <Compile Include="Models\CLE_REPARTITION_VARIABLE.cs" />
+    <Compile Include="Models\COMPTE_ANA3CH.cs" />
+    <Compile Include="Models\COMPTE_ANA4CH.cs" />
+    <Compile Include="Models\COMPTE_ANA5CH.cs" />
+    <Compile Include="Models\CRF_HIST.cs" />
+    <Compile Include="Models\CRV_HIST.cs" />
+    <Compile Include="Models\ECRITURE_ANALYTIQUE.cs" />
+    <Compile Include="Models\ECRITURE_ANALYTIQUE_HIST.cs" />
+    <Compile Include="Models\ETAT_GLOBALE.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\MAGASIN.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\METHODE_REG_COMPAGNIE.cs" />
+    <Compile Include="Models\METHODE_REG_COMP_HIST.cs" />
+    <Compile Include="Models\METHODE_REG_SIEGE.cs" />
+    <Compile Include="Models\METHODE_REG_SIEG_HIST.cs" />
+    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\NATURE_DEPENSE.cs" />
+    <Compile Include="Models\NATURE_DEPENSE_REG.cs" />
+    <Compile Include="Models\NATURE_DEPENSE_SUBVENTION.cs" />
+    <Compile Include="Models\PLAN_CPT_AN.cs" />
+    <Compile Include="Models\SIEGE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
