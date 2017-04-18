@@ -1,0 +1,22 @@
+﻿
+@model  AspNet.Identity.AdoNet.IdentityRole
+@{
+    ViewBag.Title = "Modifier le role";
+}
+
+<h2>Modifier le Role</h2>
+
+@Html.ActionLink("Retourner vers Gestionnaire de rôle", "Index")
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-group">
+          
+    <div class="col-md-offset-2 col-md-10">
+     Role  : @Html.TextBoxFor(model => model.Name) <input type="submit" value="Valider" class="btn btn-success"  />
+        </div>
+        </div>
+}

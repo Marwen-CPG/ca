@@ -1,0 +1,35 @@
+﻿
+@model  AspNet.Identity.AdoNet.IdentityUser
+@{
+    ViewBag.Title = "Modifier l'utilisateur";
+}
+
+<h2>Modifier l'utilisateur</h2>
+
+@Html.ActionLink("Retourner vers Gestionnaire d'utilisateurs", "Index")
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.PasswordHash)
+    @Html.HiddenFor(model => model.AccessFailedCount)
+    @Html.HiddenFor(model => model.EmailConfirmed)
+    @Html.HiddenFor(model => model.LockoutEnabled)
+    @Html.HiddenFor(model => model.LockoutEndDateUtc)
+    @Html.HiddenFor(model => model.PhoneNumberConfirmed)
+    @Html.HiddenFor(model => model.SecurityStamp)
+    @Html.HiddenFor(model => model.TwoFactorEnabled)
+    <div class="form-group">
+          
+        <div class="col-md-offset-2 col-md-10">
+            Nom d'utilisateur  : @Html.TextBoxFor(model => model.UserName)
+            E-mail  : @Html.TextBoxFor(model => model.Email)
+            Numero de telephone :@Html.TextBoxFor(model => model.PhoneNumber)
+            <label class="control-label "> Mot de passe : </label> @Html.Password("password", null, new { @class = "form-control col-md-2" })<br />
+        </div>
+        <input type="submit" value="Valider" class="btn btn-success btn-block"  />
+        </div>
+         
+}
