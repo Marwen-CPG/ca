@@ -10,7 +10,7 @@ namespace Comptabilite_Analytique.Models
     public partial class METHODE_REG_COMP_HIST
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IDMETHODE_REG_COMP_HIST { get; set; }
 
         [StringLength(12)]
@@ -35,6 +35,10 @@ namespace Comptabilite_Analytique.Models
         [StringLength(3)]
         public string METHODE_REG_COMPAGNIE { get; set; }
 
-        public decimal? LIBELLE_FR { get; set; }
+        [StringLength(100)]
+        public string LIBELLE_FR { get; set; }
+
+        [StringLength(4)]
+        public string ANNEE_COMPTABLE { get; set; }
     }
 }

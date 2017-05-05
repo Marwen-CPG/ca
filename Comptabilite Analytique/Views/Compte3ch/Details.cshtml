@@ -1,0 +1,54 @@
+﻿@model Comptabilite_Analytique.Models.COMPTE_ANA3CH
+
+@{
+    ViewBag.Title = "Détails - Compte Analytique à 3 chiffres";
+}
+
+<h2>Détails - Compte Analytique à 3 chiffres </h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NUMERO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUMERO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LIBELLE_FR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LIBELLE_FR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LIBELLE_AR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LIBELLE_AR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ANNEE_COMPTABLE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ANNEE_COMPTABLE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.NUMERO }) |
+    @Html.ActionLink("Back to List", "Index")*@
+
+    <a class="btn-primary btn-outline btn" href="@Url.Action("Index", "Compte3ch")"> <span class=" glyphicon glyphicon-arrow-left"></span> Retourner vers la liste</a>
+    <a class="btn-danger btn-outline btn" href="@Url.Action("Edit", "Compte3ch", new { id = Model.NUMERO })"> <span class=" glyphicon glyphicon-edit"></span> Modifier </a>
+</p>

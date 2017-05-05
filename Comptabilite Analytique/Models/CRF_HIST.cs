@@ -10,7 +10,7 @@ namespace Comptabilite_Analytique.Models
     public partial class CRF_HIST
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IDCRF_HIST { get; set; }
 
         [StringLength(12)]
@@ -42,5 +42,8 @@ namespace Comptabilite_Analytique.Models
         public string NATURE_DEPENSE { get; set; }
 
         public decimal? TAUX_REPARTITION { get; set; }
+
+        [StringLength(4)]
+        public string ANNEE_COMPTABLE { get; set; }
     }
 }

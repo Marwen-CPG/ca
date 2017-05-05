@@ -10,7 +10,7 @@ namespace Comptabilite_Analytique.Models
     public partial class METHODE_REG_SIEG_HIST
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IDMETHODE_REG_SIEG_HIST { get; set; }
 
         [StringLength(12)]
@@ -41,5 +41,8 @@ namespace Comptabilite_Analytique.Models
 
         [StringLength(100)]
         public string LIBELLE_AR { get; set; }
+
+        [StringLength(4)]
+        public string ANNEE_COMPTABLE { get; set; }
     }
 }

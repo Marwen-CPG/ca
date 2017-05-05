@@ -45,6 +45,10 @@
     <Reference Include="AspNet.Identity.AdoNet.Oracle">
       <HintPath>..\packages\AspNet.Identity.AdoNet.Oracle.0.9.4-alpha\lib\net45\AspNet.Identity.AdoNet.Oracle.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\oracle identity test\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -52,6 +56,12 @@
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.1.2400\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -168,9 +178,24 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AtelierController.cs" />
+    <Compile Include="Controllers\CleRepFixeController.cs" />
+    <Compile Include="Controllers\CleRepVarController.cs" />
+    <Compile Include="Controllers\Compte3chController.cs" />
+    <Compile Include="Controllers\Compte4chController.cs" />
+    <Compile Include="Controllers\Compte5chController.cs" />
+    <Compile Include="Controllers\EcritureController.cs" />
+    <Compile Include="Controllers\EtatGlobaleController.cs" />
+    <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MagasinController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\MethodeRegCompController.cs" />
+    <Compile Include="Controllers\MethodeRegSiegeController.cs" />
+    <Compile Include="Controllers\NatureDepenseController.cs" />
+    <Compile Include="Controllers\NatureDepenseRegController.cs" />
+    <Compile Include="Controllers\NatureDepenseSubController.cs" />
+    <Compile Include="Controllers\SiegeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -184,6 +209,8 @@
     <Compile Include="Models\COMPTE_ANA5CH.cs" />
     <Compile Include="Models\CRF_HIST.cs" />
     <Compile Include="Models\CRV_HIST.cs" />
+    <Compile Include="Models\EcritureMultiligneViewModel.cs" />
+    <Compile Include="Models\EcritureType1.cs" />
     <Compile Include="Models\ECRITURE_ANALYTIQUE.cs" />
     <Compile Include="Models\ECRITURE_ANALYTIQUE_HIST.cs" />
     <Compile Include="Models\ETAT_GLOBALE.cs" />
@@ -198,7 +225,6 @@
     <Compile Include="Models\NATURE_DEPENSE.cs" />
     <Compile Include="Models\NATURE_DEPENSE_REG.cs" />
     <Compile Include="Models\NATURE_DEPENSE_SUBVENTION.cs" />
-    <Compile Include="Models\PLAN_CPT_AN.cs" />
     <Compile Include="Models\SIEGE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -206,6 +232,10 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery.jqGrid\ellipsis-xbl.xml" />
+    <Content Include="Content\jquery.jqGrid\ui.jqgrid.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -254,12 +284,57 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\zipdeploy.pubxml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
-    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\i18n\grid.locale-ar.js" />
+    <Content Include="Scripts\i18n\grid.locale-bg.js" />
+    <Content Include="Scripts\i18n\grid.locale-bg1251.js" />
+    <Content Include="Scripts\i18n\grid.locale-cat.js" />
+    <Content Include="Scripts\i18n\grid.locale-cn.js" />
+    <Content Include="Scripts\i18n\grid.locale-cs.js" />
+    <Content Include="Scripts\i18n\grid.locale-da.js" />
+    <Content Include="Scripts\i18n\grid.locale-de.js" />
+    <Content Include="Scripts\i18n\grid.locale-dk.js" />
+    <Content Include="Scripts\i18n\grid.locale-el.js" />
+    <Content Include="Scripts\i18n\grid.locale-en.js" />
+    <Content Include="Scripts\i18n\grid.locale-es.js" />
+    <Content Include="Scripts\i18n\grid.locale-fa.js" />
+    <Content Include="Scripts\i18n\grid.locale-fi.js" />
+    <Content Include="Scripts\i18n\grid.locale-fr.js" />
+    <Content Include="Scripts\i18n\grid.locale-gl.js" />
+    <Content Include="Scripts\i18n\grid.locale-he.js" />
+    <Content Include="Scripts\i18n\grid.locale-hr.js" />
+    <Content Include="Scripts\i18n\grid.locale-hr1250.js" />
+    <Content Include="Scripts\i18n\grid.locale-hu.js" />
+    <Content Include="Scripts\i18n\grid.locale-id.js" />
+    <Content Include="Scripts\i18n\grid.locale-is.js" />
+    <Content Include="Scripts\i18n\grid.locale-it.js" />
+    <Content Include="Scripts\i18n\grid.locale-ja.js" />
+    <Content Include="Scripts\i18n\grid.locale-kr.js" />
+    <Content Include="Scripts\i18n\grid.locale-lt.js" />
+    <Content Include="Scripts\i18n\grid.locale-mne.js" />
+    <Content Include="Scripts\i18n\grid.locale-nl.js" />
+    <Content Include="Scripts\i18n\grid.locale-no.js" />
+    <Content Include="Scripts\i18n\grid.locale-pl.js" />
+    <Content Include="Scripts\i18n\grid.locale-pt-br.js" />
+    <Content Include="Scripts\i18n\grid.locale-pt.js" />
+    <Content Include="Scripts\i18n\grid.locale-ro.js" />
+    <Content Include="Scripts\i18n\grid.locale-ru.js" />
+    <Content Include="Scripts\i18n\grid.locale-sk.js" />
+    <Content Include="Scripts\i18n\grid.locale-sr-latin.js" />
+    <Content Include="Scripts\i18n\grid.locale-sr.js" />
+    <Content Include="Scripts\i18n\grid.locale-sv.js" />
+    <Content Include="Scripts\i18n\grid.locale-th.js" />
+    <Content Include="Scripts\i18n\grid.locale-tr.js" />
+    <Content Include="Scripts\i18n\grid.locale-tw.js" />
+    <Content Include="Scripts\i18n\grid.locale-ua.js" />
+    <Content Include="Scripts\i18n\grid.locale-vi.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
     <Content Include="Scripts\jquery-1.12.4.min.map" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.jqGrid.js" />
+    <Content Include="Scripts\jquery.jqGrid.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -290,7 +365,9 @@
     <Content Include="theme\vendor\morrisjs\morris.css" />
     <Content Include="theme\vendor\morrisjs\morris.js" />
     <Content Include="theme\vendor\morrisjs\morris.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -371,8 +448,98 @@
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Grid\Index.cshtml" />
+    <Content Include="Views\Atelier\Create.cshtml" />
+    <Content Include="Views\Atelier\Delete.cshtml" />
+    <Content Include="Views\Atelier\Details.cshtml" />
+    <Content Include="Views\Atelier\Edit.cshtml" />
+    <Content Include="Views\Atelier\Index.cshtml" />
+    <Content Include="Views\Magasin\Create.cshtml" />
+    <Content Include="Views\Magasin\Delete.cshtml" />
+    <Content Include="Views\Magasin\Details.cshtml" />
+    <Content Include="Views\Magasin\Edit.cshtml" />
+    <Content Include="Views\Magasin\Index.cshtml" />
+    <Content Include="Views\Siege\Create.cshtml" />
+    <Content Include="Views\Siege\Delete.cshtml" />
+    <Content Include="Views\Siege\Details.cshtml" />
+    <Content Include="Views\Siege\Edit.cshtml" />
+    <Content Include="Views\Siege\Index.cshtml" />
+    <Content Include="Views\NatureDepense\Create.cshtml" />
+    <Content Include="Views\NatureDepense\Delete.cshtml" />
+    <Content Include="Views\NatureDepense\Details.cshtml" />
+    <Content Include="Views\NatureDepense\Edit.cshtml" />
+    <Content Include="Views\NatureDepense\Index.cshtml" />
+    <Content Include="Views\NatureDepenseReg\Create.cshtml" />
+    <Content Include="Views\NatureDepenseReg\Delete.cshtml" />
+    <Content Include="Views\NatureDepenseReg\Details.cshtml" />
+    <Content Include="Views\NatureDepenseReg\Edit.cshtml" />
+    <Content Include="Views\NatureDepenseReg\Index.cshtml" />
+    <Content Include="Views\NatureDepenseSub\Create.cshtml" />
+    <Content Include="Views\NatureDepenseSub\Delete.cshtml" />
+    <Content Include="Views\NatureDepenseSub\Details.cshtml" />
+    <Content Include="Views\NatureDepenseSub\Edit.cshtml" />
+    <Content Include="Views\NatureDepenseSub\Index.cshtml" />
+    <Content Include="Views\MethodeRegSiege\Create.cshtml" />
+    <Content Include="Views\MethodeRegSiege\Delete.cshtml" />
+    <Content Include="Views\MethodeRegSiege\Details.cshtml" />
+    <Content Include="Views\MethodeRegSiege\Edit.cshtml" />
+    <Content Include="Views\MethodeRegSiege\Index.cshtml" />
+    <Content Include="Views\MethodeRegComp\Create.cshtml" />
+    <Content Include="Views\MethodeRegComp\Delete.cshtml" />
+    <Content Include="Views\MethodeRegComp\Details.cshtml" />
+    <Content Include="Views\MethodeRegComp\Edit.cshtml" />
+    <Content Include="Views\MethodeRegComp\Index.cshtml" />
+    <Content Include="Views\CleRepFixe\Create.cshtml" />
+    <Content Include="Views\CleRepFixe\Delete.cshtml" />
+    <Content Include="Views\CleRepFixe\Details.cshtml" />
+    <Content Include="Views\CleRepFixe\Edit.cshtml" />
+    <Content Include="Views\CleRepFixe\Index.cshtml" />
+    <Content Include="Views\CleRepVar\Create.cshtml" />
+    <Content Include="Views\CleRepVar\Delete.cshtml" />
+    <Content Include="Views\CleRepVar\Details.cshtml" />
+    <Content Include="Views\CleRepVar\Edit.cshtml" />
+    <Content Include="Views\CleRepVar\Index.cshtml" />
+    <Content Include="Views\Compte3ch\Create.cshtml" />
+    <Content Include="Views\Compte3ch\Delete.cshtml" />
+    <Content Include="Views\Compte3ch\Details.cshtml" />
+    <Content Include="Views\Compte3ch\Edit.cshtml" />
+    <Content Include="Views\Compte3ch\Index.cshtml" />
+    <Content Include="Views\Compte4ch\Create.cshtml" />
+    <Content Include="Views\Compte4ch\Delete.cshtml" />
+    <Content Include="Views\Compte4ch\Details.cshtml" />
+    <Content Include="Views\Compte4ch\Edit.cshtml" />
+    <Content Include="Views\Compte4ch\Index.cshtml" />
+    <Content Include="Views\Compte5ch\Create.cshtml" />
+    <Content Include="Views\Compte5ch\Delete.cshtml" />
+    <Content Include="Views\Compte5ch\Details.cshtml" />
+    <Content Include="Views\Compte5ch\Edit.cshtml" />
+    <Content Include="Views\Compte5ch\Index.cshtml" />
+    <Content Include="Views\Grid\Crf.cshtml" />
+    <Content Include="Views\Grid\Crv.cshtml" />
+    <Content Include="Views\Grid\Siege.cshtml" />
+    <Content Include="Views\Grid\Magasin.cshtml" />
+    <Content Include="Views\Grid\Atelier.cshtml" />
+    <Content Include="Views\Grid\Pca3.cshtml" />
+    <Content Include="Views\Grid\Pca4.cshtml" />
+    <Content Include="Views\Grid\Pca5.cshtml" />
+    <Content Include="Views\Grid\NatureDepense.cshtml" />
+    <Content Include="Views\Grid\NatureDepenseReg.cshtml" />
+    <Content Include="Views\Grid\NatureDepenseSub.cshtml" />
+    <Content Include="Views\Grid\MethRegComp.cshtml" />
+    <Content Include="Views\Grid\MethRegSiege.cshtml" />
+    <Content Include="Views\Ecriture\Create.cshtml" />
+    <Content Include="Views\Ecriture\Delete.cshtml" />
+    <Content Include="Views\Ecriture\Details.cshtml" />
+    <Content Include="Views\Ecriture\Edit.cshtml" />
+    <Content Include="Views\Ecriture\Index.cshtml" />
+    <Content Include="Views\Grid\Ecriture.cshtml" />
+    <Content Include="Views\Ecriture\Ajouter.cshtml" />
+    <Content Include="Views\Ecriture\Ajoutert1.cshtml" />
+    <Content Include="Views\EtatGlobale\Create.cshtml" />
+    <Content Include="Views\EtatGlobale\Delete.cshtml" />
+    <Content Include="Views\EtatGlobale\Details.cshtml" />
+    <Content Include="Views\EtatGlobale\Edit.cshtml" />
+    <Content Include="Views\EtatGlobale\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,190 @@
+﻿@*@model IEnumerable<Comptabilite_Analytique.Models.NATURE_DEPENSE_SUBVENTION>*@
+@using PagedList;
+
+@using PagedList.Mvc;
+
+@model IPagedList<Comptabilite_Analytique.Models.NATURE_DEPENSE_SUBVENTION>
+
+@{
+    ViewBag.Title = "Liste Des Natures Dépenses de subvensions ";
+}
+
+<br /><br />
+<ul class="nav nav-pills">
+    <li role="presentation"><a href="@Url.Action("Index", "NatureDepense")"> Natures Dépenses</a></li>
+    <li role="presentation"><a href="@Url.Action("Index", "NatureDepenseReg")">Natures Dépenses Regroupées</a></li>
+    <li role="presentation" class="active"><a href="@Url.Action("Index", "NatureDepenseSub")">Natures Dépenses de subvensions</a></li>
+
+</ul>
+<hr />
+<h2>Liste Des Natures Dépenses  de subvensions  </h2>
+
+<div class="btn-group pull-right   " role="group">
+    <button type="button" class="btn btn-default dropdown-toggle pull-right  " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Mode d'affichage
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="@Url.Action("Index", "NatureDepenseSub")">Tableau <span class="glyphicon glyphicon-th-list"></span></a></li>
+        <li><a href="@Url.Action("NatureDepenseSub", "Grid")">Grille &nbsp; &nbsp; <span class="glyphicon  glyphicon-list-alt"></span></a></li>
+    </ul>
+</div> <br />
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a class="btn-success btn" href="@Url.Action("Create", "NatureDepense")"> <span class=" glyphicon glyphicon-plus"></span> Ajouter une Nature Dépense de Subvension </a>
+</p>
+
+@using (Html.BeginForm("Index", "NatureDepense", FormMethod.Get, new { @class = "search-form" }))
+{
+
+    <div class="form-group has-feedback">
+        <label for="search" class="sr-only">Search</label>
+        @Html.TextBox("chercher", null, new { @placeholder = "Saisir le nom de la nature dépenser à rechercher puis appuyez sur Entrée", @class = "form-control" })
+        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+    </div>
+}
+
+<table class="table">
+    <tr class=" active ">
+        <th class="btn-default">
+            <span class="glyphicon glyphicon-asterisk"></span> &nbsp;
+            @Html.DisplayNameFor(model => model.First().NATURE_DEPENSE.NUMERO)
+        </th>
+        <th class="btn-default">
+            <span class="glyphicon glyphicon-asterisk"></span> &nbsp;
+            @Html.DisplayNameFor(model => model.First().NUMERO)
+        </th>
+        <th class="btn-default">
+            <span class="glyphicon glyphicon-text-background"></span> &nbsp;
+            @Html.DisplayNameFor(model => model.First().LIBELLE_FR)
+        </th>
+        <th class="btn-default">
+            <span class="glyphicon glyphicon-text-background"></span> &nbsp;
+            @Html.DisplayNameFor(model => model.First().LIBELLE_AR)
+        </th>
+        <th class="btn-default">
+            <span class="glyphicon glyphicon-cog"></span> &nbsp;
+            Action
+        </th>
+    </tr>
+@if (Model.Count == 0)
+{
+    <tr>
+        <td colspan="3">
+            <div class="alert alert-danger alert-dismissable fade in col-sm-12 col-lg-12 col-md-12" role="alert">
+                <button type="button" id="cbtn" class="close" data-dismiss="alert" aria-hidden="true">
+                    &times;
+                </button>
+                Aucun Enregistrement Trouvé ...
+            </div>
+        </td>
+    </tr>
+}
+    else
+
+    {foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NATURE_DEPENSE.NUMERO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NUMERO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LIBELLE_FR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LIBELLE_AR)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.NUMERO }) |
+                @Html.ActionLink("Details", "Details", new { id = item.NUMERO }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.NUMERO })*@
+                <div class="btn-group">
+                    <a class="btn-success  active btn btn btn-xs" href="@Url.Action("Details", "NatureDepenseSub", new { id = item.NUMERO })">
+                        <span class=" glyphicon glyphicon-th-list"></span> Details
+                    </a>
+
+                    <a class="btn-warning active btn  btn btn-xs" href="@Url.Action("Edit", "NatureDepenseSub", new { id = item.NUMERO })">
+                        <span class=" glyphicon glyphicon-wrench"></span> Modifier
+                    </a>
+
+                    <a class="btn-danger  active btn btn btn-xs" href="@Url.Action("Delete", "NatureDepenseSub", new { id = item.NUMERO })">
+                        <span class=" glyphicon glyphicon-remove"></span> Supprimer
+                    </a>
+
+
+                </div>
+            </td>
+        </tr>
+    }
+    }
+</table>
+
+<div class="col-lg-offset-2">
+    @Html.PagedListPager(Model, pageNumber => Url.Action("Index", new { pageNumber }))
+</div>
+@section scripts{
+
+    <style>
+        .search-form .form-group {
+            float: right !important;
+            transition: all 0.35s, border-radius 0s;
+            width: 32px;
+            height: 32px;
+            background-color: #fff;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+        }
+
+            .search-form .form-group input.form-control {
+                padding-right: 20px;
+                border: 0 none;
+                background: transparent;
+                box-shadow: none;
+                display: block;
+            }
+
+                .search-form .form-group input.form-control::-webkit-input-placeholder {
+                    display: none;
+                }
+
+                .search-form .form-group input.form-control:-moz-placeholder {
+                    /* Firefox 18- */
+                    display: none;
+                }
+
+                .search-form .form-group input.form-control::-moz-placeholder {
+                    /* Firefox 19+ */
+                    display: none;
+                }
+
+                .search-form .form-group input.form-control:-ms-input-placeholder {
+                    display: none;
+                }
+
+            .search-form .form-group:hover,
+            .search-form .form-group.hover {
+                width: 100%;
+                border-radius: 4px 25px 25px 4px;
+            }
+
+            .search-form .form-group span.form-control-feedback {
+                position: absolute;
+                top: -1px;
+                right: -2px;
+                z-index: 2;
+                display: block;
+                width: 34px;
+                height: 34px;
+                line-height: 34px;
+                text-align: center;
+                color: #3596e0;
+                left: initial;
+                font-size: 14px;
+            }
+    </style>
+}

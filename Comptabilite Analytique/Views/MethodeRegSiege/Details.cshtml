@@ -1,0 +1,80 @@
+﻿@model Comptabilite_Analytique.Models.METHODE_REG_SIEGE
+
+@{
+    ViewBag.Title = "Détails - Méthode de regrouppement Total Siège";
+}
+
+<h2>Détails - Méthode de regrouppement Total Siège</h2>
+
+<div>
+ 
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.COMPTE_ANA5CH.NUMERO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COMPTE_ANA5CH.NUMERO)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.COMPTE_ANA5CH.LIBELLE_FR) compte
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COMPTE_ANA5CH.LIBELLE_FR)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SIEGE_N_SIEGE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SIEGE_N_SIEGE)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CODE_GROUPEMENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CODE_GROUPEMENT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.METHODE_REG_SIEGE1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.METHODE_REG_SIEGE1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LIBELLE_FR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LIBELLE_FR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LIBELLE_AR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LIBELLE_AR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ANNEE_COMPTABLE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ANNEE_COMPTABLE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.IDMETHODE_REG_SIEGE }) |
+    @Html.ActionLink("Back to List", "Index")*@
+    <a class="btn-primary btn-outline btn" href="@Url.Action("Index", "MethodeRegSiege")"> <span class=" glyphicon glyphicon-arrow-left"></span> Retourner vers la liste</a>
+    <a class="btn-danger btn-outline btn" href="@Url.Action("Edit", "MethodeRegSiege", new { id = Model.IDMETHODE_REG_SIEGE })"> <span class=" glyphicon glyphicon-edit"></span> Modifier </a>
+</p>

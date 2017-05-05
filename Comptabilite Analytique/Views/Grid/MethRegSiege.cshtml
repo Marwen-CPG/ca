@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Liste des Méthodes de regroupements total Siège";
+}
+<h2>Liste des Méthodes de regroupements total Siège</h2>
+<div class="btn-group pull-right   " role="group">
+    <button type="button" class="btn btn-default dropdown-toggle pull-right  " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Mode d'affichage
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="@Url.Action("Index", "MethodeRegSiege")">Tableau <span class="glyphicon glyphicon-th-list"></span></a></li>
+        <li><a href="@Url.Action("MethRegSiege", "Grid")">Grille &nbsp; &nbsp; <span class="glyphicon  glyphicon-list-alt"></span></a></li>
+    </ul>
+</div> <br />
+<hr />
+<table id="list" class="col-md-12"></table>
+<div id="pager"></div>
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function myfunction() {
+            var pageWidth = $("#list").parent().width() - 100;
+            $('#list').jqGrid({
+                caption: "Liste des Méthodes de regroupements total Siège ",
+                url: '/Grid/getMrts/',
+                datatype: "json",
+                contentType: "application/json; charset-utf-8",
+                mtype: 'GET',
+                colNames: ['COMPTE_ANA5_NUMERO', 'SIEGE_N_SIEGE', 'CODE_GROUPEMENT', 'METHODE_REG_COMPAGNIE', '  LIBELLE_FR', 'LIBELLE_AR'],
+                colModel: [
+             { name: 'COMPTE_ANA5_NUMERO', index: 'COMPTE_ANA5_NUMERO', sorttype: "int", width: (pageWidth * (25 / 100)) },
+             { name: 'SIEGE_N_SIEGE', index: 'SIEGE_N_SIEGE', sorttype: "int", width: (pageWidth * (25 / 100)) },
+             { name: 'CODE_GROUPEMENT', index: 'CODE_GROUPEMENT', width: (pageWidth * (25 / 100)) },
+             { name: 'METHODE_REG_COMPAGNIE', index: 'METHODE_REG_COMPAGNIE', width: (pageWidth * (25 / 100)) },
+             { name: 'LIBELLE_FR', index: 'LIBELLE_FR', width: (pageWidth * (25 / 100)) },
+             { name: 'LIBELLE_AR', index: 'LIBELLE_AR', width: (pageWidth * (25 / 100)) },
+                ],
+                rowNum: 25,
+
+                rowList: [10, 20,25 , 30, 40],
+                width: null,
+                shrinkToFit: false,
+                pager: jQuery('#pager'),
+                height: '100%',
+              //  autowidht: true,
+                loadonce: true,
+                jsonReader: {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+
+                },
+
+            });
+
+            jQuery("#list").jqGrid('navGrid', '#pager', { edit: false, add: false, del: false });
+        });
+
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

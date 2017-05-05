@@ -1,0 +1,294 @@
+﻿@model Comptabilite_Analytique.Models.COMPTE_ANA4CH
+
+@{
+    ViewBag.Title = "Modifier -  Compte Analytique à 4 chiffres";
+}
+
+<h2>Modifier -  Compte Analytique à 4 chiffres</h2>
+
+@using (Html.BeginForm(null, null, new { @id = string.Empty },
+    FormMethod.Post, new { @id = "myform" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+ 
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.NUMERO)
+        @Html.HiddenFor(model => model.COMPTE_ANA3CH_NUMERO)
+      
+        <div class="form-group">
+            @Html.LabelFor(model => model.NUMERO, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NUMERO, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.NUMERO, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LIBELLE_FR, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LIBELLE_FR, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LIBELLE_FR, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LIBELLE_AR, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LIBELLE_AR, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LIBELLE_AR, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ANNEE_COMPTABLE, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ANNEE_COMPTABLE, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ANNEE_COMPTABLE, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Appliquer les modifications" class="btn btn-warning btn-block" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<div>
+    @*@Html.ActionLink("Back to List", "Index")*@
+    <a class="btn-primary btn-outline btn" href="@Url.Action("Index", "Compte4ch")"> <span class=" glyphicon glyphicon-arrow-left"></span> Retourner vers la liste</a>
+</div>
+@section scripts{
+    <script type="text/javascript">
+    //------  prev form
+
+    (function ($) {
+
+        $.fn.previewForm = function (options) {
+            var form_settings = $.extend({
+                identifier: 'label',
+                show_password: true,
+                extratext: 'Souhaitez-vous enregistrer',
+                yes: 'Oui',
+                no: 'Non',
+                title: 'Veuillez prévisualiser les modifications'
+            }, options);
+
+            var dia_log;
+            var renderBUTTON;
+            var this_frm;
+            this_frm = $(this);
+
+            $(this).submit(function () {
+
+                if ($('#pfomdata').length) {
+                    return true;
+                }
+
+
+                dia_log = "";
+                var needle_cnfrm;
+
+                if (this.id.length > 0) { needle_cnfrm = '#' + this.id + ' label'; }
+                else { needle_cnfrm = '.' + $(this).attr('class') + ' label'; }
+
+                $(needle_cnfrm).each(function (i, val) {
+                    if ($(this).text().length > 2) {
+
+                        what_t = $('#' + $(this).attr('for'));
+
+                        switch (what_t.prop('type')) {
+                            case 'password':
+                                if (!form_settings.show_password)
+                                    dia_log += $(this).text() + " Votre mot de passe   <br />";
+                                else
+                                    dia_log += $(this).text() + what_t.val() + " <br />";
+                                break;
+                            case 'select-one':
+                                dia_log += $(this).text() +' : '+ $('#' + $(this).attr('for') + ' ' + ' option:selected').text() + " <br />";
+                                break;
+                            case 'radio':
+                                if (what_t.is(':checked'))
+                                    dia_log += $(this).text() + ' :  ' + what_t.val() + " <br />";
+                                break;
+                            case 'checkbox':
+                                if (what_t.is(':checked'))
+                                    dia_log += $(this).text() + ' : ' + what_t.val() + " <br />";
+                                break;
+                            case 'undefined':
+                                break;
+                            default:
+                                dia_log += $(this).text() + '  :  '+ what_t.val() + " <br />";
+                                break;
+
+                        }
+                    }
+                });
+                dia_log = dia_log.replace('undefined', '');
+
+
+                renderBUTTON = "";
+                renderBUTTON += '<a href="javascript:void(0);" class="button form_yes">' + form_settings.yes + '<span></span></a>';
+                renderBUTTON += '<a href="javascript:void(0);" class="button form_no">' + form_settings.no + '<span></span></a>';
+
+                var renderTemplate = [
+                    '<div id="previewOverlay">',
+    '<div id="previewBox">',
+        '<h1>', form_settings.title, '</h1>',
+        '<p>', dia_log, '</p>',
+        '<p>', form_settings.extratext, '</p>',
+        '<div id="previewButtons">',
+                renderBUTTON,
+                '</div></div></div>'
+            ].join('');
+
+                $(renderTemplate).hide().appendTo('body').fadeIn();
+
+                $(".form_yes").click(function () {
+                    var input = $("<input>").attr("type", "hidden").attr("id", "pfomdata").val("true");
+                    this_frm.append($(input));
+                    this_frm.submit();
+                });
+
+                $(".form_no").click(function () {
+                    $('#previewOverlay').fadeOut(function () {
+                        $(this).remove();
+                    });
+                });
+
+                return false;
+
+            });
+        }
+
+    })(jQuery);
+
+
+
+    $(document).ready(function () {
+        $('#myform').previewForm({ show_password: false });
+    });
+    </script>
+
+    <style>
+        .ui-datepicker-calendar {
+            display: none;
+        }
+        /*prev form css*/
+        #previewOverlay {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: -moz-linear-gradient(rgba(11,11,11,0.1), rgba(11,11,11,0.6)) repeat-x rgba(11,11,11,0.2);
+            background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(11,11,11,0.1)), to(rgba(11,11,11,0.6))) repeat-x rgba(11,11,11,0.2);
+            z-index: 100000;
+        }
+
+        #previewBox {
+            background: url('body_bg.jpg') repeat-x left bottom #e5e5e5;
+            width: 460px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin: -130px 0 0 -230px;
+            border: 1px solid rgba(33, 33, 33, 0.6);
+            -moz-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6) inset;
+            -webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6) inset;
+            box-shadow: 0 0 2px rgba(255, 255, 255, 0.6) inset;
+        }
+
+            #previewBox h1,
+            #previewBox p {
+                font: 26px/1 'Cuprum','Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+                background: url('header_bg.jpg') repeat-x left bottom #f5f5f5;
+                padding: 18px 25px;
+                text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);
+                color: #666;
+            }
+
+            #previewBox h1 {
+                letter-spacing: 0.3px;
+                color: #888;
+            }
+
+            #previewBox p {
+                background: none;
+                font-size: 16px;
+                line-height: 1.4;
+                padding-top: 7px;
+            }
+
+        #previewButtons {
+            padding: 15px 0 25px;
+            text-align: center;
+        }
+
+        #previewBox .button {
+            display: inline-block;
+            background: #610B21 no-repeat;
+            color: white;
+            position: relative;
+            height: 33px;
+            font: 17px/33px 'Cuprum','Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+            margin-right: 15px;
+            padding: 0 35px 0 40px;
+            text-decoration: none;
+            border: none;
+        }
+
+            #previewBox .button:last-child {
+                margin-right: 0;
+            }
+
+            #previewBox .button span {
+                position: absolute;
+                top: 0;
+                right: -5px;
+                background: url('buttons.png') no-repeat;
+                width: 5px;
+                height: 33px;
+            }
+
+        #previewBox .form_yes {
+            background-position: left top;
+            text-shadow: 1px 1px 0 #5889a2;
+        }
+
+            #previewBox .form_yes span {
+                background-position: -195px 0;
+            }
+
+            #previewBox .form_yes:hover {
+                background-position: left bottom;
+            }
+
+                #previewBox .form_yes:hover span {
+                    background-position: -195px bottom;
+                }
+
+        #previewBox .form_no {
+            background-position: -200px top;
+            text-shadow: 1px 1px 0 #707070;
+        }
+
+            #previewBox .form_no span {
+                background-position: -395px 0;
+            }
+
+            #previewBox .form_no:hover {
+                background-position: -200px bottom;
+            }
+
+                #previewBox .form_no:hover span {
+                    background-position: -395px bottom;
+                }
+    </style> }
+
+

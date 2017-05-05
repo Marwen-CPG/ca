@@ -1,0 +1,107 @@
+﻿@model Comptabilite_Analytique.Models.CLE_REPARTITION_VARIABLE
+
+@{
+    ViewBag.Title = "Supprimer";
+}
+
+<h2>Supprimer - Clé de Repartition Variable </h2>
+
+@*<h3>Êtes-vous sûr de vouloir supprimer?</h3>
+    <div>*@
+
+<div class="panel panel-danger">
+
+    <div class="panel-heading"><h4>Êtes-vous sûr de vouloir supprimer?</h4>  </div>
+
+    <div class="panel-body">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.COMPTE_ANA5CH.LIBELLE_FR) compte source
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.COMPTE_ANA5CH.LIBELLE_FR)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.COMPTE_ANA5CH.NUMERO) compte source
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.COMPTE_ANA5CH.NUMERO)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.COMPTE_ANA5CH1.LIBELLE_FR) compte destination
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.COMPTE_ANA5CH1.LIBELLE_FR)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.COMPTE_ANA5CH1.NUMERO) compte destination
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.COMPTE_ANA5CH1.NUMERO)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NATURE_DEPENSE1.NUMERO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NATURE_DEPENSE1.NUMERO)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CODE_GROUPEMENT)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CODE_GROUPEMENT)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UR_REPARTITION)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UR_REPARTITION)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TAUX_REPARTITION)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TAUX_REPARTITION)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ANNEE_COMPTABLE)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ANNEE_COMPTABLE)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @*<div class="form-actions no-color">
+                    @Html.ActionLink("Back to List", "Index")
+                    <a class="btn-primary btn-outline btn" href="@Url.Action("Index", "MethodeRegSiege")"> <span class=" glyphicon glyphicon-arrow-left"></span> Retourner vers la liste</a>
+                    <input type="submit" value="Supprimer" class="btn-danger btn-outline btn" />
+                </div>*@
+            <div class="btn-toolbar text-center" role="toolbar">
+                <a class="btn-primary btn-outline btn" href="@Url.Action("Index", "CleRepVar")"> <span class=" glyphicon glyphicon-arrow-left"></span> Retourner vers la liste</a>
+                <input type="submit" value="Supprimer" class="btn-danger btn-outline btn" />
+            </div>
+        }
+    </div>
+</div>
+
+

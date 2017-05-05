@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table id="list"  class="col-md-12"></table>
+<div id="pager"></div>
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function myfunction() {
+            var pageWidth = $("#list").parent().width() - 100; 
+            $('#list').jqGrid({
+                caption: "User Details",
+                url: '/Grid/getEmployees/',
+                datatype: "json",
+                contentType: "application/json; charset-utf-8",
+                mtype: 'GET',
+                colNames: ['ID', '  Name', 'email'/*,'Phone'*/],
+                colModel: [
+            { name: 'id', index: 'id', sorttype: "int", width: (pageWidth * (30 / 100)) },
+            { name: 'Name', index: 'Name', width: (pageWidth * (35 / 100)) },
+            { name: 'email', index: 'email', width: (pageWidth * (35 / 100)) },
+        //    { name: 'Phone', index: 'Phone', width: 80 },
+                ],
+                rowNum: 10,
+                rowNum: [10, 20, 30, 40],
+                width: null,
+                shrinkToFit: false,
+                pager: jQuery('#pager'),
+                height: '100%',
+              //  autowidht: true,
+                loadonce: true,
+                jsonReader: {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+
+                },
+
+            });
+
+            jQuery("#list").jqGrid('navGrid', '#pager', { edit: false, add: false, del: true });
+        });
+
+    </script>
+}
+@*<script language="javascript">
+
+$(document).ready(function () {
+    $("#list2").jqGrid({
+        url: 'http://localhost:22182/Grid/getEmployees',
+        datatype: "json",
+        contentType: "application/json; charset-utf-8",
+        mtype: 'GET',
+        colNames: ['ID', '  Name', 'email',
+        'Phone' ],
+        colModel: [
+            { name: 'id', index: 'id', width: 55, sorttype: "int" },
+            { name: 'Name', index: 'Name', width: 90 },
+            { name: 'email', index: 'email', width: 100 },
+            { name: 'Phone', index: 'Phone', width: 80 }
+             
+        ],
+        rowNum: 5,
+        rowList: [5, 10, 15],
+        pager: '#pager2',
+        sortname: 'id',
+        viewrecords: true,
+        sortorder: "asc",
+        caption: "JSON Example"
+    });
+    jQuery("#list2").jqGrid('navGrid', '#pager2',
+        { edit: false, add: false, del: false });
+});
+</script>*@  

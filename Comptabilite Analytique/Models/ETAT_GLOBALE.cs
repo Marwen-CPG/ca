@@ -9,15 +9,25 @@ namespace Comptabilite_Analytique.Models
     [Table("MARWENAMARA.ETAT_GLOBALE")]
     public partial class ETAT_GLOBALE
     {
-        [Required]
+        [Key]
+        [StringLength(4)]
+        public string ANNEE_COMPTABLE { get; set; }
+
+ 
         [StringLength(6)]
         public string MOISENCOURS { get; set; }
 
+       
         public bool CHEVAUCHEMENT { get; set; }
 
+       
         public bool VEROUILLE { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ID { get; set; }
+        public int NUMSEQ { get; set; }
+
+        public int NUMECR { get; set; }
+
+        [StringLength(6)]
+        public string MOISCHEV { get; set; }
     }
 }

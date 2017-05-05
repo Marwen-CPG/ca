@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Liste des Clés de Repartition Fixes ";
+}
+
+<h2>Liste des Clés de Repartition Fixes</h2>
+<div class="btn-group pull-right   " role="group">
+    <button type="button" class="btn btn-default dropdown-toggle pull-right  " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Mode d'affichage
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="@Url.Action("Index","CleRepFixe")">Tableau <span class="glyphicon glyphicon-th-list"></span></a></li>
+        <li><a href="@Url.Action("CleRepFixe", "Grid")">Grille &nbsp; &nbsp; <span class="glyphicon  glyphicon-list-alt"></span></a></li>
+    </ul>
+</div> <br />
+ <hr />
+<table id="list" class="col-md-12"></table>
+<div id="pager"></div>
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function myfunction() {
+            var pageWidth = $("#list").parent().width() - 100;
+            $('#list').jqGrid({
+                caption: "Liste des clés de répartion fixes ",
+                url: '/Grid/getCleRepFixe/',
+                datatype: "json",
+                contentType: "application/json; charset-utf-8",
+                mtype: 'GET',
+                colNames: ['NATURE_DEPENSE', 'COMPTE_NUMERO', '  SIEGE_N_SIEGE', 'CODE_GROUPEMENT', 'UR_REPARTITION', 'CA_REPARTITION', 'TAUX_REPARTITION' ],
+                colModel: [
+            { name: 'NATURE_DEPENSE', index: 'NATURE_DEPENSE', sorttype: "int", width: (pageWidth * (14 / 100)) },
+            { name: 'COMPTE_NUMERO', index: 'COMPTE_NUMERO', sorttype: "int", width: (pageWidth * (14 / 100)) },
+            { name: 'SIEGE_N_SIEGE', index: 'SIEGE_N_SIEGE', sorttype: "int", width: (pageWidth * (14 / 100)) },
+              { name: 'CODE_GROUPEMENT', index: 'CODE_GROUPEMENT', sorttype: "int", width: (pageWidth * (14 / 100)) },
+            { name: 'UR_REPARTITION', index: 'UR_REPARTITION', sorttype: "int", width: (pageWidth * (14 / 100)) },
+            { name: 'CA_REPARTITION', index: 'CA_REPARTITION', sorttype: "int", width: (pageWidth * (14 / 100)) },
+           { name: 'TAUX_REPARTITION', index: 'TAUX_REPARTITION', sorttype: "int", width: (pageWidth * (14 / 100)) },
+        
+                ],
+                rowNum: 25,
+             
+                rowList: [10, 20,25 , 30, 40],
+                width: null,
+                shrinkToFit: false,
+                pager: jQuery('#pager'),
+                height: '100%',
+              //  autowidht: true,
+                loadonce: true,
+                jsonReader: {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+
+                },
+
+            });
+
+            jQuery("#list").jqGrid('navGrid', '#pager', { edit: false, add: false, del: true });
+        });
+
+    </script>
+}
+ 
+
+  
+

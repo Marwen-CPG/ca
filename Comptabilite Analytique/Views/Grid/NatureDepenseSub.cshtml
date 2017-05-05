@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Liste des Natures Dépenses de Subvensions";
+}
+<br /><br />
+<ul class="nav nav-pills">
+    <li role="presentation"><a href="@Url.Action("Index", "NatureDepense")"> Natures Dépenses</a></li>
+    <li role="presentation"><a href="@Url.Action("Index", "NatureDepenseReg")">Natures Dépenses Regroupées</a></li>
+    <li role="presentation" class="active"><a href="@Url.Action("Index", "NatureDepenseSub")">Natures Dépenses de subvensions</a></li>
+</ul>
+<hr />
+<h2>Liste des  Natures Dépenses Subvensions </h2>
+<div class="btn-group pull-right   " role="group">
+    <button type="button" class="btn btn-default dropdown-toggle pull-right  " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Mode d'affichage
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="@Url.Action("Index", "NatureDepenseSub")">Tableau <span class="glyphicon glyphicon-th-list"></span></a></li>
+        <li><a href="@Url.Action("NatureDepenseSub", "Grid")">Grille &nbsp; &nbsp; <span class="glyphicon  glyphicon-list-alt"></span></a></li>
+    </ul>
+</div> <br />
+<hr />
+<table id="list" class="col-md-12"></table>
+<div id="pager"></div>
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function myfunction() {
+            var pageWidth = $("#list").parent().width() - 100;
+            $('#list').jqGrid({
+                caption: "Liste des  Natures Dépenses de Subvensions ",
+                url: '/Grid/getNds/',
+                datatype: "json",
+                contentType: "application/json; charset-utf-8",
+                mtype: 'GET',
+                colNames: ['NDR_NUMERO', 'NUMERO', '  LIBELLE_FR', 'LIBELLE_AR'],
+                colModel: [
+             { name: 'NDR_NUMERO', index: 'NDR_NUMERO', sorttype: "int", width: (pageWidth * (25 / 100)) },
+             { name: 'NUMERO', index: 'NUMERO', sorttype: "int", width: (pageWidth * (25 / 100)) },
+             { name: 'LIBELLE_FR', index: 'LIBELLE_FR', width: (pageWidth * (25 / 100)) },
+             { name: 'LIBELLE_AR', index: 'LIBELLE_AR', width: (pageWidth * (25 / 100)) },
+                ],
+                rowNum: 25,
+
+                rowList: [10, 20,25 , 30, 40],
+                width: null,
+                shrinkToFit: false,
+                pager: jQuery('#pager'),
+                height: '100%',
+              //  autowidht: true,
+                loadonce: true,
+                jsonReader: {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+
+                },
+
+            });
+
+            jQuery("#list").jqGrid('navGrid', '#pager', { edit: false, add: false, del: false });
+        });
+
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

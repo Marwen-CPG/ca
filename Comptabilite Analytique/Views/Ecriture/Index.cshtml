@@ -1,0 +1,253 @@
+﻿@*@model IEnumerable<Comptabilite_Analytique.Models.ECRITURE_ANALYTIQUE>*@
+ 
+@using PagedList;
+
+@using PagedList.Mvc;
+
+@model IPagedList<Comptabilite_Analytique.Models.ECRITURE_ANALYTIQUE>
+@{
+    ViewBag.Title = "Liste des Ecritures Analytiques ";
+}
+
+<h2>Liste des Ecritures Analytiques</h2>
+<div class="btn-group pull-right   " role="group">
+    <button type="button" class="btn btn-default dropdown-toggle pull-right  " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Mode d'affichage
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="@Url.Action("Index", "Ecriture")">Tableau <span class="glyphicon glyphicon-th-list"></span></a></li>
+        <li><a href="@Url.Action("Ecriture", "Grid")">Grille &nbsp; &nbsp; <span class="glyphicon  glyphicon-list-alt"></span></a></li>
+    </ul>
+</div> <br />
+<hr />
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a class="btn-success btn" href="@Url.Action("Ajoutert1", "Ecriture")"> <span class=" glyphicon glyphicon-plus"></span> Saisir une Ecriture analytique Type 1</a>
+    <a class="btn-success btn" href="@Url.Action("Ajouter", "Ecriture")"> <span class=" glyphicon glyphicon-plus"></span> Saisir une Ecriture analytique Type 2</a>
+
+</p>
+
+
+@using (Html.BeginForm("Index", "Ecriture", FormMethod.Get, new { @class = "search-form" }))
+{
+
+    <div class="form-group has-feedback">
+        <label for="search" class="sr-only">Search</label>
+        @Html.TextBox("chercher", null, new { @placeholder = "Saisir le mois pour afficher les ecritures correspondantes", @class = "form-control" })
+        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().COMPTE_ANA5CH.NUMERO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().SIEGE_N_SIEGE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().NATURE_DEPENSE.NUMERO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().NUMERO_SEQUENCE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ORIGINE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().GROUPE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DATE_ECRITURE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().NUMERO_ECRITURE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().LIBELLE_FR)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.First().LIBELLE_AR)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.First().DATE_AJOUT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ANNEE_COMPTABLE)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.First().MONTANT)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.First().CODE_BUDGET)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CENTRE_ECRITURE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().COMPTE_GENERALE)
+        </th>*@
+        <th></th>
+    </tr>
+
+@if (Model.Count == 0)
+    {
+    <tr>
+        <td colspan="3">
+            <div class="alert alert-danger alert-dismissable fade in col-sm-12 col-lg-12 col-md-12" role="alert">
+                <button type="button" id="cbtn" class="close" data-dismiss="alert" aria-hidden="true">
+                    &times;
+                </button>
+                Aucun Enregistrement Trouvé ...
+            </div>
+        </td>
+    </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+    <tr>
+        <td>
+    @Html.DisplayFor(modelItem => item.COMPTE_ANA5CH.NUMERO)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => item.SIEGE_N_SIEGE)
+</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NATURE_DEPENSE.NUMERO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NUMERO_SEQUENCE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ORIGINE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GROUPE)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.DATE_ECRITURE)*@
+           @{
+          var s = String.Concat(item.DATE_ECRITURE.Value.Month, "/", item.DATE_ECRITURE.Value.Year);
+
+            @Html.Encode(s);}
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NUMERO_ECRITURE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LIBELLE_FR)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.LIBELLE_AR)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.DATE_AJOUT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ANNEE_COMPTABLE)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.MONTANT)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.CODE_BUDGET)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CENTRE_ECRITURE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COMPTE_GENERALE)
+        </td>*@
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.IDECRIRE_ANALYTIQUE }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDECRIRE_ANALYTIQUE }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDECRIRE_ANALYTIQUE })*@
+            <div class="btn-group">
+                <a class="btn-success  active btn btn btn-xs" href="@Url.Action("Details", "Ecriture", new { id = item.IDECRIRE_ANALYTIQUE })">
+                    <span class=" glyphicon glyphicon-th-list"></span> Details
+                </a>
+
+                <a class="btn-warning active btn  btn btn-xs" href="@Url.Action("Edit", "Ecriture", new { id = item.IDECRIRE_ANALYTIQUE })">
+                    <span class=" glyphicon glyphicon-wrench"></span> Modifier
+                </a>
+
+                <a class="btn-danger  active btn btn btn-xs" href="@Url.Action("Delete", "Ecriture", new { id = item.IDECRIRE_ANALYTIQUE })">
+                    <span class=" glyphicon glyphicon-remove"></span> Supprimer
+                </a>
+
+
+            </div>
+        </td>
+    </tr>
+}
+    }
+</table>
+
+<div class="col-lg-offset-2">
+    @Html.PagedListPager(Model, pageNumber => Url.Action("Index", new { pageNumber }))
+</div>
+@section scripts{
+
+    <style>
+        .search-form .form-group {
+            float: right !important;
+            transition: all 0.35s, border-radius 0s;
+            width: 32px;
+            height: 32px;
+            background-color: #fff;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+        }
+
+            .search-form .form-group input.form-control {
+                padding-right: 20px;
+                border: 0 none;
+                background: transparent;
+                box-shadow: none;
+                display: block;
+            }
+
+                .search-form .form-group input.form-control::-webkit-input-placeholder {
+                    display: none;
+                }
+
+                .search-form .form-group input.form-control:-moz-placeholder {
+                    /* Firefox 18- */
+                    display: none;
+                }
+
+                .search-form .form-group input.form-control::-moz-placeholder {
+                    /* Firefox 19+ */
+                    display: none;
+                }
+
+                .search-form .form-group input.form-control:-ms-input-placeholder {
+                    display: none;
+                }
+
+            .search-form .form-group:hover,
+            .search-form .form-group.hover {
+                width: 100%;
+                border-radius: 4px 25px 25px 4px;
+            }
+
+            .search-form .form-group span.form-control-feedback {
+                position: absolute;
+                top: -1px;
+                right: -2px;
+                z-index: 2;
+                display: block;
+                width: 34px;
+                height: 34px;
+                line-height: 34px;
+                text-align: center;
+                color: #3596e0;
+                left: initial;
+                font-size: 14px;
+            }
+    </style>
+}

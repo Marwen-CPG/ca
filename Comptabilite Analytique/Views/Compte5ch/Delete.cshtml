@@ -1,0 +1,104 @@
+﻿@model Comptabilite_Analytique.Models.COMPTE_ANA5CH
+
+@{
+    ViewBag.Title = "Supprimer";
+}
+
+<h2>Supprimer - Compte Analytique à 5 chiffres </h2>
+
+@*<h3>Êtes-vous sûr de vouloir supprimer?</h3>
+    <div>*@
+
+<div class="panel panel-danger">
+
+    <div class="panel-heading"><h4>Êtes-vous sûr de vouloir supprimer?</h4>  </div>
+
+    <div class="panel-body">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.COMPTE_ANA4CH.NUMERO) compte à 4 chiffres
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.COMPTE_ANA4CH.NUMERO)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.COMPTE_ANA4CH.LIBELLE_FR) compte à 4 chiffres
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.COMPTE_ANA4CH.LIBELLE_FR)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NUMERO) compte à 5 chiffres
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NUMERO)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LIBELLE_FR) compte à 5 chiffres
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LIBELLE_FR)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SIEGE.LIBELLE_FR) siege
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SIEGE.LIBELLE_FR) 
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SIEGE.NUMERO_SIEGE)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SIEGE.NUMERO_SIEGE)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LIBELLE_FR)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LIBELLE_FR)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LIBELLE_AR)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LIBELLE_AR)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ANNEE_COMPTABLE)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ANNEE_COMPTABLE)
+            </dd>
+              </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                @*<div class="form-actions no-color">
+                    @Html.ActionLink("Back to List", "Index")
+                    <a class="btn-primary btn-outline btn" href="@Url.Action("Index", "Compte4ch")"> <span class=" glyphicon glyphicon-arrow-left"></span> Retourner vers la liste</a>
+                    <input type="submit" value="Supprimer" class="btn-danger btn-outline btn" />
+                </div>*@
+                <div class="btn-toolbar text-center" role="toolbar">
+                    <a class="btn-primary btn-outline btn" href="@Url.Action("Index", "Compte5ch")"> <span class=" glyphicon glyphicon-arrow-left"></span> Retourner vers la liste</a>
+                    <input type="submit" value="Supprimer" class="btn-danger btn-outline btn" />
+                </div>
+            }
+</div>
+</div>
+

@@ -1,0 +1,26 @@
+﻿@model Comptabilite_Analytique.Models.ETAT_GLOBALE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ETAT_GLOBALE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ANNEE_COMPTABLE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ANNEE_COMPTABLE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

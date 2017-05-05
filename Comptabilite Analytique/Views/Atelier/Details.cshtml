@@ -1,0 +1,46 @@
+﻿@model Comptabilite_Analytique.Models.ATELIER
+
+@{
+    ViewBag.Title = "Détails - Atelier";
+}
+
+<h2>Détails - Atelier</h2>
+
+<div>
+ 
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SIEGE.NUMERO_SIEGE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SIEGE.NUMERO_SIEGE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LIBELLE_FR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LIBELLE_FR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LIBELLE_AR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LIBELLE_AR)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.CODE_ATELIER }) |
+    @Html.ActionLink("Back to List", "Index")*@
+  <a class="btn-primary btn-outline btn" href="@Url.Action("Index", "ATELIER")"> <span class=" glyphicon glyphicon-arrow-left"></span> Retourner vers la liste</a>
+  <a class="btn-danger btn-outline btn" href="@Url.Action("Edit", "Atelier", new { id = Model.CODE_ATELIER })"> <span class=" glyphicon glyphicon-edit"></span> Modifier </a>
+
+
+</p>

@@ -1,0 +1,144 @@
+﻿@model Comptabilite_Analytique.Models.ECRITURE_ANALYTIQUE
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ECRITURE_ANALYTIQUE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.COMPTE_ANA5CH.LIBELLE_FR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COMPTE_ANA5CH.LIBELLE_FR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NATURE_DEPENSE.NDR_NUMERO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NATURE_DEPENSE.NDR_NUMERO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NUMERO_SEQUENCE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUMERO_SEQUENCE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ORIGINE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ORIGINE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GROUPE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GROUPE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATE_ECRITURE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATE_ECRITURE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NUMERO_ECRITURE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUMERO_ECRITURE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LIBELLE_FR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LIBELLE_FR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LIBELLE_AR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LIBELLE_AR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATE_AJOUT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATE_AJOUT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ANNEE_COMPTABLE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ANNEE_COMPTABLE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MONTANT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MONTANT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CODE_BUDGET)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CODE_BUDGET)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CENTRE_ECRITURE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CENTRE_ECRITURE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COMPTE_GENERALE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COMPTE_GENERALE)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

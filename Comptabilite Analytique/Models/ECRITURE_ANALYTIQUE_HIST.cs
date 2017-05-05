@@ -10,7 +10,7 @@ namespace Comptabilite_Analytique.Models
     public partial class ECRITURE_ANALYTIQUE_HIST
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IDECRIRE_ANALYTIQUE_HIST { get; set; }
 
         [StringLength(12)]

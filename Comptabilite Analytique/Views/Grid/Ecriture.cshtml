@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Liste des Ecritures ";
+}
+
+<h2>Liste des Ecritures </h2>
+<div class="btn-group pull-right   " role="group">
+    <button type="button" class="btn btn-default dropdown-toggle pull-right  " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Mode d'affichage
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="@Url.Action("Index", "Ecriture")">Tableau <span class="glyphicon glyphicon-th-list"></span></a></li>
+        <li><a href="@Url.Action("Ecriture", "Grid")">Grille &nbsp; &nbsp; <span class="glyphicon  glyphicon-list-alt"></span></a></li>
+    </ul>
+</div> <br />
+<hr />
+<table id="list" class="col-md-12"></table>
+<div id="pager"></div>
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function myfunction() {
+            var pageWidth = $("#list").parent().width() - 100;
+            $('#list').jqGrid({
+                caption: "Liste des Ecritures ",
+                url: '/Grid/getEcriture/',
+                datatype: "json",
+                contentType: "application/json; charset-utf-8",
+                mtype: 'GET',
+                colNames: ['ORIGINE', 'GROUPE', 'DATE_ECRITURE', 'COMPTE NUMERO', 'SIEGE', 'NATURE_DEPENSE', 'MONTANT', 'LIBELLE_FR', 'LIBELLE_AR'],
+                colModel: [
+            { name: 'ORIGINE', index: 'ORIGINE', sorttype: "int", width: (pageWidth * (11 / 100)) },
+            { name: 'GROUPE', index: 'GROUPE', sorttype: "int", width: (pageWidth * (11 / 100)) },
+            { name: 'DATE_ECRITURE', index: 'DATE_ECRITURE', width: (pageWidth * (11 / 100)) },
+            { name: 'COMPTE NUMERO', index: 'COMPTE NUMERO', sorttype: "int", width: (pageWidth * (11 / 100)) },
+              { name: 'SIEGE', index: 'SIEGE', sorttype: "int", width: (pageWidth * (11 / 100)) },
+            { name: 'NATURE_DEPENSE', index: 'NATURE_DEPENSE', sorttype: "int", width: (pageWidth * (11 / 100)) },
+            { name: 'MONTANT', index: 'MONTANT', width: (pageWidth * (11 / 100)) },
+            { name: 'LIBELLE_FR', index: 'LIBELLE_FR', width: (pageWidth * (11 / 100)) },
+              { name: 'LIBELLE_AR', index: 'LIBELLE_AR', width: (pageWidth * (11 / 100)) },
+            
+                ],
+                rowNum: 25,
+
+                rowList: [10, 20,25 , 30, 40],
+                width: null,
+                shrinkToFit: false,
+                pager: jQuery('#pager'),
+                height: '100%',
+              //  autowidht: true,
+                loadonce: true,
+                jsonReader: {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+
+                },
+
+            });
+
+            jQuery("#list").jqGrid('navGrid', '#pager', { edit: false, add: false, del: false });
+        });
+
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
