@@ -19,9 +19,9 @@ namespace Comptabilite_Analytique.Controllers
         // GET: Atelier
         public  ActionResult Index(string chercher, int? pageNumber)
         {
-            var aTELIER = db.ATELIER.Include(a => a.SIEGE);
+            var aTELIER = db.ATELIER.Include(a => a.SIEGE).OrderBy(a => a.CODE_ATELIER);
              if ( chercher != null && chercher.Length > 0)
-            { return View(aTELIER.Where(s => s.LIBELLE_FR.ToLower().Contains(chercher.ToLower().Trim())).ToList().ToPagedList(pageNumber ?? 1, 10)); }
+            { return View(aTELIER.Where(s => s.LIBELLE_FR.ToLower().Contains(chercher.ToLower().Trim())).ToList().ToPagedList(pageNumber ?? 1, 1000)); }
             else 
              {  
             return View(  aTELIER.ToList().ToPagedList(pageNumber ?? 1, 10));

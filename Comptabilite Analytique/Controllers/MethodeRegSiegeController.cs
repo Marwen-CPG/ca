@@ -18,10 +18,10 @@ namespace Comptabilite_Analytique.Controllers
         // GET: MethodeRegSiege
         public ActionResult Index(string chercher, int? pageNumber)
         {
-            var mETHODE_REG_SIEGE = db.METHODE_REG_SIEGE.Include(m => m.COMPTE_ANA5CH);
+            var mETHODE_REG_SIEGE = db.METHODE_REG_SIEGE.Include(m => m.COMPTE_ANA5CH).OrderBy( m => m.METHODE_REG_SIEGE1);
    
             if (chercher != null && chercher.Length > 0)
-            { return View(mETHODE_REG_SIEGE.Where(s => s.SIEGE_N_SIEGE.ToLower().Contains(chercher.ToLower().Trim())).ToList().ToPagedList(pageNumber ?? 1, 10)); }
+            { return View(mETHODE_REG_SIEGE.Where(s => s.SIEGE_N_SIEGE.ToLower().Contains(chercher.ToLower().Trim())).ToList().ToPagedList(pageNumber ?? 1, 1000)); }
             else
             {
                 return View(mETHODE_REG_SIEGE.ToList().ToPagedList(pageNumber ?? 1, 30));

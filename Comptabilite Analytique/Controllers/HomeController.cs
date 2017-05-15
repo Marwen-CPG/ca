@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Comptabilite_Analytique.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,25 @@ namespace Comptabilite_Analytique.Controllers
     {
         public ActionResult Index()
         {
+            Model db = new Model();
+            var etat = db.ETAT_GLOBALE.FirstOrDefault();
+
+            ViewBag.AnneeComptable = etat.ANNEE_COMPTABLE;
+            ViewBag.MoisComptable = etat.MOISENCOURS;
+            if (etat.CHEVAUCHEMENT)
+
+            { ViewBag.Chevauchement = "Oui";
+            ViewBag.MoisChevauchement = etat.MOISCHEV;
+            }
+            else {
+                ViewBag.Chevauchement = "Non";
+                ViewBag.MoisChevauchement = "N/D"; }
+
+            if (etat.VEROUILLE)
+
+            ViewBag.EtatSystème = "Bloqué";
+            else
+                ViewBag.EtatSystème = "Accessible";
             return View();
         }
 

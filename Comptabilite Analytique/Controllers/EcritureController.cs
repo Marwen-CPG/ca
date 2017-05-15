@@ -20,7 +20,7 @@ namespace Comptabilite_Analytique.Controllers
  
         public ActionResult Index(string chercher, int? pageNumber)
         {
-            var eCRITURE_ANALYTIQUE = db.ECRITURE_ANALYTIQUE.Include(e => e.COMPTE_ANA5CH).Include(e => e.NATURE_DEPENSE).OrderBy(p => p.NUMERO_SEQUENCE);
+            var eCRITURE_ANALYTIQUE = db.ECRITURE_ANALYTIQUE.Include(e => e.COMPTE_ANA5CH).Include(e => e.NATURE_DEPENSE).OrderBy(p => p.NUMERO_ECRITURE);
             if (chercher != null && chercher.Length > 0)
             { return View(eCRITURE_ANALYTIQUE.Where(s => s.DATE_ECRITURE.Value.Month.ToString().ToLower().Contains(chercher.ToLower().Trim())).ToList().ToPagedList(pageNumber ?? 1, 1000)); }
             else
@@ -98,19 +98,22 @@ namespace Comptabilite_Analytique.Controllers
             etat.NUMSEQ+=2;
             etat.NUMECR++;
 
-            if (eCRITURE_ANALYTIQUE.COMPTE_ANA5_NUMEROC.ToString().Substring(0, 2) == "93" && String.IsNullOrWhiteSpace(eCRITURE_ANALYTIQUE.CODE_BUDGETC)  )
+            if (eCRITURE_ANALYTIQUE.COMPTE_ANA5_NUMEROC.ToString().Substring(0, 2) == "93")
             {
-                ModelState.AddModelError("CODE_BUDGETC", "Veuillez saisir le Code Budget !!");
-            ViewBag.Message="le Code Budget doit être compsé de  6 chiffres !!";}
-            else if (e.IsMatch(eCRITURE_ANALYTIQUE.CODE_BUDGETD))
-            { ModelState.AddModelError("CODE_BUDGETD", "le Code Budget doit être compsé de  6 chiffres !!"); }
+                if (String.IsNullOrWhiteSpace(eCRITURE_ANALYTIQUE.CODE_BUDGETC))
+                { ModelState.AddModelError("CODE_BUDGETC", "Veuillez saisir le Code Budget !!"); }
 
-            if (eCRITURE_ANALYTIQUE.COMPTE_ANA5_NUMEROD.ToString().Substring(0, 2) == "93" && String.IsNullOrWhiteSpace(eCRITURE_ANALYTIQUE.CODE_BUDGETD))
-            {
-                ModelState.AddModelError("CODE_BUDGETD", "Veuillez saisir le Code Budget !!");
+                else if (e.IsMatch(eCRITURE_ANALYTIQUE.CODE_BUDGETC))
+                { ModelState.AddModelError("CODE_BUDGETC", "le Code Budget doit être compsé de  6 chiffres !!"); }
             }
-            else if (e.IsMatch(eCRITURE_ANALYTIQUE.CODE_BUDGETD))
-            { ModelState.AddModelError("CODE_BUDGETD", "le Code Budget doit être compsé de  6 chiffres !!"); }
+
+            if (eCRITURE_ANALYTIQUE.COMPTE_ANA5_NUMEROD.ToString().Substring(0, 2) == "93")
+            {
+                if (String.IsNullOrWhiteSpace(eCRITURE_ANALYTIQUE.CODE_BUDGETD))
+                { ModelState.AddModelError("CODE_BUDGETD", "Veuillez saisir le Code Budget !!"); }
+else   if (e.IsMatch(eCRITURE_ANALYTIQUE.CODE_BUDGETD))
+                { ModelState.AddModelError("CODE_BUDGETD", "le Code Budget doit être compsé de  6 chiffres !!"); }
+            }
             if (ModelState.IsValid)
             {
                 var cc = db.COMPTE_ANA5CH.Where(c => c.NUMERO == eCRITURE_ANALYTIQUE.COMPTE_ANA5_NUMEROD
@@ -168,86 +171,73 @@ namespace Comptabilite_Analytique.Controllers
             //ViewBag.ND_NUMERO = new SelectList(db.NATURE_DEPENSE, "NUMERO", "NUMERO", eCRITURE_ANALYTIQUE.ND_NUMERO);
             return View(eCRITURE_ANALYTIQUE);
         }
+
+        [HttpGet]
         public ActionResult Ajouter()
         {
-            ViewBag.SIEGE_N_SIEGED = new SelectList(db.SIEGE, "NUMERO_SIEGE", "NUMERO_SIEGE");
-            ViewBag.SIEGE_N_SIEGEC = new SelectList(db.SIEGE, "NUMERO_SIEGE", "NUMERO_SIEGE");
-            ViewBag.ND_NUMERO = new SelectList(db.NATURE_DEPENSE, "NUMERO", "NUMERO");
-            return View();
-        }
 
+            EcritureMultiligneViewModel ecriture = new EcritureMultiligneViewModel()
+            {
+
+                Ecritures = new List<EcritureT2ViewModel> { new EcritureT2ViewModel()}
+            };
+      
+            return View( );
+        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> ModifierNbrLignes(EcritureMultiligneViewModel eCRITURE_ANALYTIQUE ,FormCollection col)
+        //{ string nb =col["nbl"];
+        //    Regex numerique = new Regex(@"\d$");
+
+        //    if (!String.IsNullOrEmpty(nb) && numerique.IsMatch(nb))
+        //    {
+        //        ViewBag.nbl = Int16.Parse(nb);
+        //    }
+        //    else
+        //    {
+        //        ViewBag.nbl = 3;
+        //        ViewBag.Message = "Veullier saisir un nombre de ligne valide !!!"; }
+        //    return View("Ajouter");
+        //}
         //[Bind(Include = "ND_NUMERO,COMPTE_ANA5_NUMEROC,COMPTE_ANA5_NUMEROD,SIEGE_N_SIEGEC,SIEGE_N_SIEGED,ORIGINE,GROUPE,DATE_ECRITURE,LIBELLE_FR,LIBELLE_AR,MONTANT,CODE_BUDGETD,CODE_BUDGETC,COMPTE_GENERALE")] 
+
+        public ActionResult AjouterLigne()
+        {
+            return PartialView("Ecriture");
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Ajouter(EcritureMultiligneViewModel eCRITURE_ANALYTIQUE, FormCollection col)
-        {
-
-
+        public async Task<ActionResult> Ajouter(EcritureMultiligneViewModel eCRITURE_ANALYTIQUE)
+        {  
             var etat = db.ETAT_GLOBALE.First();
-            ECRITURE_ANALYTIQUE ecriture = new ECRITURE_ANALYTIQUE();
+            bool valide = true;
+            string erreur = "" ;
             string err = "";
-            Int16 n = 0;
-
-            foreach (string e in col.Keys)
+            decimal solde = 0 ;
+             decimal tot = 0 ;
+            int ligne = 0;
+            eCRITURE_ANALYTIQUE.Ecritures.RemoveAt(eCRITURE_ANALYTIQUE.Ecritures.Count -1 );
+            var eq = eCRITURE_ANALYTIQUE;
+            if ( eCRITURE_ANALYTIQUE.Ecritures.Count > 2 )
             {
-                if (e.Equals("naturedepense" + n.ToString()))
-                    n++;
-            }
-            var m = n - 1;
-            var a = col.Keys.Count;
-            while (col["naturedepense" + n.ToString()] != null)
-            {
-                ecriture.GROUPE = eCRITURE_ANALYTIQUE.GROUPE;
-                ecriture.ORIGINE = eCRITURE_ANALYTIQUE.ORIGINE;
-                ecriture.SIEGE_N_SIEGE = col["siege" + n.ToString()];
-                ecriture.ND_NUMERO = col["naturedepense" + n.ToString()];
-                ecriture.COMPTE_ANA5_NUMERO = int.Parse(col["compte" + n.ToString()]);
-                ecriture.MONTANT = Decimal.Parse(col["montant" + n.ToString()]);
-                ecriture.CODE_BUDGET = col["codebudget" + n.ToString()];
-                ecriture.LIBELLE_FR = col["naturedepense" + n.ToString()];
-                ecriture.DATE_ECRITURE = eCRITURE_ANALYTIQUE.DATE_ECRITURE;
-                ecriture.DATE_AJOUT = DateTime.Now;
-                ecriture.NUMERO_SEQUENCE = etat.NUMSEQ.ToString();
-                ecriture.NUMERO_ECRITURE = etat.NUMECR.ToString();
-                var e = ecriture;
-                n++;
-            }
-            var mx = n;
-
-
-
-
-            if (ModelState.IsValid)
-            {
-                var cc = db.COMPTE_ANA5CH.Where(c => c.NUMERO == eCRITURE_ANALYTIQUE.COMPTE_ANA5_NUMEROD
-                    && c.SIEGE_N_SIEGE == eCRITURE_ANALYTIQUE.SIEGE_N_SIEGED).ToList();
-                if (cc.Count == 0)
+                foreach (EcritureT2ViewModel ecriture in eCRITURE_ANALYTIQUE.Ecritures)
                 {
-                    err += "La paire  Compte  Siege n'existe pas dans le plan comptable !! veuillez verifier les données saisies ... ";
-                    ViewBag.Message = err;
-                    ViewBag.SIEGE_N_SIEGED = new SelectList(db.SIEGE, "NUMERO_SIEGE", "NUMERO_SIEGE", eCRITURE_ANALYTIQUE.SIEGE_N_SIEGED);
-                    ViewBag.SIEGE_N_SIEGEC = new SelectList(db.SIEGE, "NUMERO_SIEGE", "NUMERO_SIEGE", eCRITURE_ANALYTIQUE.SIEGE_N_SIEGEC);
-                    ViewBag.ND_NUMERO = new SelectList(db.NATURE_DEPENSE, "NUMERO", "NUMERO", eCRITURE_ANALYTIQUE.ND_NUMERO);
-                    return View(eCRITURE_ANALYTIQUE);
+                    ligne++;
+                    verifier(ecriture , out solde , out valide , out  err  );
+                    erreur += MvcHtmlString.Create("<b>Ligne " + ligne.ToString() + " : </b><br>");
+                    erreur += err;
+                    tot +=solde ;
                 }
-                var x = db.ECRITURE_ANALYTIQUE.Where(p => p.COMPTE_ANA5_NUMERO == eCRITURE_ANALYTIQUE.COMPTE_ANA5_NUMEROD)
-                          .Where(p => p.SIEGE_N_SIEGE == eCRITURE_ANALYTIQUE.SIEGE_N_SIEGED)
-                          .Where(p => p.DATE_ECRITURE == eCRITURE_ANALYTIQUE.DATE_ECRITURE)
-                          .Where(p => p.MONTANT == eCRITURE_ANALYTIQUE.MONTANT)
-                          .Where(p => p.ORIGINE == eCRITURE_ANALYTIQUE.ORIGINE)
-                          .Where(p => p.GROUPE == eCRITURE_ANALYTIQUE.GROUPE)
-                          .Where(p => p.ND_NUMERO == eCRITURE_ANALYTIQUE.ND_NUMERO).ToList();
-                if (x.Count != 0)
-                {
-                    ViewBag.Message = " Une valeur existe deja pour cette ecriture ! Pensez a la modifier ";
-                  
-
+                if (tot != 0)
+                { erreur += MvcHtmlString.Create("<b>Le solde doit être 0 !! solde = </u>" + tot.ToString() + "</u> </b><br>");
+                valide = false;
                 }
-                else
+                if (valide)
                 {
                     try
                     {
-                        db.ECRITURE_ANALYTIQUE.Add(ecriture);
+                        // db.ECRITURE_ANALYTIQUE.Add(ecriture);
                         db.Entry(etat).State = EntityState.Modified;
                         await db.SaveChangesAsync();
                         return RedirectToAction("Index");
@@ -258,13 +248,21 @@ namespace Comptabilite_Analytique.Controllers
                         ViewBag.Message = " Operation non aboutie ! Erreur : " + e.Message
                              + " Contacter l'adminstrateur   ";
 
-                         
+                        ViewBag.nbl = eCRITURE_ANALYTIQUE.Ecritures.Count;
                         return View(eCRITURE_ANALYTIQUE);
                     }
                 }
+
+                else
+                {
+                    ViewBag.nbl = eCRITURE_ANALYTIQUE.Ecritures.Count;
+                    ViewBag.action = "edit";
+                    ViewBag.Message = erreur;
+                    return View(eCRITURE_ANALYTIQUE);
+                }
             }
 
-           
+            ViewBag.Message = "Le nombre de lignes doit être 3 ou plus !! Veuiller recommencer";
             return View(eCRITURE_ANALYTIQUE);
         }
  
@@ -443,24 +441,116 @@ namespace Comptabilite_Analytique.Controllers
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
+
         public JsonResult ValidateCBD(string CODE_BUDGETD , string COMPTE_ANA5_NUMEROD)
         { Regex e = new Regex(@"\d{6}$");
             if (!this.Request.IsAjaxRequest()) return null;
-                   
+               if (COMPTE_ANA5_NUMEROD.Length == 5)
+            {      
                 if (COMPTE_ANA5_NUMEROD.Substring(0, 2) == "93" && String.IsNullOrWhiteSpace(CODE_BUDGETD) && CODE_BUDGETD.Length < 6)
                 return Json(string.Format("Veuillez saisir le Code Budget !! "), JsonRequestBehavior.AllowGet);
                 if (!e.IsMatch(CODE_BUDGETD))
                   return Json(string.Format("le Code Budget doit être compsé de  6 chiffres !! "), JsonRequestBehavior.AllowGet);
             return Json(true, JsonRequestBehavior.AllowGet);
+            }
+               return null;
         }
         public JsonResult ValidateCBC(string CODE_BUDGETC, string COMPTE_ANA5_NUMEROC)
         {
             if (!this.Request.IsAjaxRequest()) return null;
-
-            if (COMPTE_ANA5_NUMEROC.Substring(0, 2) == "93" && String.IsNullOrWhiteSpace(CODE_BUDGETC) && CODE_BUDGETC.Length < 6 )
-                return Json(string.Format("Veuillez saisir le Code Budget !! "), JsonRequestBehavior.AllowGet);
-            return Json(true, JsonRequestBehavior.AllowGet);
+            if (COMPTE_ANA5_NUMEROC.Length == 5)
+            {
+                if (COMPTE_ANA5_NUMEROC.Substring(0, 2) == "93" && String.IsNullOrWhiteSpace(CODE_BUDGETC) && CODE_BUDGETC.Length < 6)
+                    return Json(string.Format("Veuillez saisir le Code Budget !! "), JsonRequestBehavior.AllowGet);
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return null;
         }
         #endregion
+
+        void verifier(EcritureT2ViewModel e, out decimal s, out bool valide, out string err )
+        {
+            valide = true;
+          bool  validesc = true;
+            err = "";
+            s = 0;
+            Regex twodigits = new Regex(@"\d{2}$");
+            Regex compte = new Regex(@"^9\d{4}$");
+            Regex codebud = new Regex(@"^\d{6}$");
+            try {
+                s += (decimal)e.MONTANT;
+            }catch(Exception ex ){
+
+                valide = false;
+                err += MvcHtmlString.Create(" le montant doit etre numérique !</br>"); 
+            }
+
+            if (! twodigits.IsMatch(e.SIEGE_N_SIEGE))
+            {valide = false ;
+            validesc = false;
+            err += MvcHtmlString.Create(" le n° siege doit etre deux chiffres !</br>"); 
+            }
+            else {
+            var cc = db.SIEGE.Where(c => c.NUMERO_SIEGE  == e.SIEGE_N_SIEGE).ToList();
+            if (cc.Count == 0)
+            {
+                valide = false;
+                validesc = false;
+                err += MvcHtmlString.Create(" Le siège " + e.SIEGE_N_SIEGE + " n'existe pas !!</br>");
+            }
+            }
+            if (e.ND_NUMERO.ToString().Length > 2)
+            {
+                valide = false;
+                err += MvcHtmlString.Create(" le numéro Nature dépense doit etre deux chiffres !</br>");
+            }
+            else
+            {
+                var cc = db.NATURE_DEPENSE.Where(c => c.NUMERO.Substring(2, 2) == e.ND_NUMERO).ToList();
+            if (cc.Count == 0)
+            {
+                valide = false;
+                err += MvcHtmlString.Create("La nature dépense " + e.ND_NUMERO + " n'existe pas !! </br>");
+            }
+            }
+            if (!compte.IsMatch(e.COMPTE_ANA5_NUMERO.ToString()))
+            {
+                valide = false;
+                validesc = false;
+                err += MvcHtmlString.Create(" le n° de compte doit etre 5 chiffres qui commence par 9 ! </br>");
+            }
+            else
+            {
+                var cc = db.COMPTE_ANA5CH.Where(c => c.NUMERO == e.COMPTE_ANA5_NUMERO).ToList();
+                if (cc.Count == 0)
+                {
+                    valide = false;
+                    validesc = false;
+                    err += MvcHtmlString.Create(" Le compte " + e.COMPTE_ANA5_NUMERO + " n'existe pas !!</br>");
+                }
+            }
+            if (validesc)
+            {
+                var cc = db.COMPTE_ANA5CH.Where(c => c.NUMERO == e.COMPTE_ANA5_NUMERO
+                    && c.SIEGE_N_SIEGE == e.SIEGE_N_SIEGE ).ToList();
+                if (cc.Count == 0)
+                    validesc = false;
+                    valide = false;
+                    err += MvcHtmlString.Create(" La paire  Compte " + e.COMPTE_ANA5_NUMERO + " Siege " + e.SIEGE_N_SIEGE + " n'existe pas dans le plan comptable !! </br>");
+            }
+            if (validesc)
+            {
+
+                
+                if (e.COMPTE_ANA5_NUMERO.ToString().Substring(0, 2) == "93")
+                    if (String.IsNullOrWhiteSpace(e.CODE_BUDGET))
+                    {
+                err += MvcHtmlString.Create("Veuillez saisir le Code Budget !!  </br>");
+                }
+            }
+
+           
+
+        }
     }
 }

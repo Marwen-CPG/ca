@@ -23,7 +23,7 @@ namespace Comptabilite_Analytique
              var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
              if (!roleManager.RoleExists("administrateur"))
              {
-                 // first we create Admin rool  
+                 // first we create Admin role  
                  var role = new IdentityRole();
                  role.Name = "administrateur";
                  roleManager.Create(role);

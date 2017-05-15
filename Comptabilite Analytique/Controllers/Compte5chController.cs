@@ -19,10 +19,10 @@ namespace Comptabilite_Analytique.Controllers
         // GET: Compte5ch
         public ActionResult Index(string chercher, int? pageNumber)
         {
-            var cOMPTE_ANA5CH = db.COMPTE_ANA5CH.Include(c => c.COMPTE_ANA4CH).Include(c => c.SIEGE);
+            var cOMPTE_ANA5CH = db.COMPTE_ANA5CH.Include(c => c.COMPTE_ANA4CH).Include(c => c.SIEGE).OrderBy(c => c.SIEGE_N_SIEGE);
 
             if (chercher != null && chercher.Length > 0)
-            { return View(cOMPTE_ANA5CH.Where(s => s.LIBELLE_FR.ToLower().Contains(chercher.ToLower().Trim())).ToList().ToPagedList(pageNumber ?? 1, 30)); }
+            { return View(cOMPTE_ANA5CH.Where(s => s.LIBELLE_FR.ToLower().Contains(chercher.ToLower().Trim())).ToList().ToPagedList(pageNumber ?? 1, 1000)); }
             else
             {
                 return View(cOMPTE_ANA5CH.ToList().ToPagedList(pageNumber ?? 1, 30));

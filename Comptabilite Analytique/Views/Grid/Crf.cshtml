@@ -26,7 +26,7 @@
                 datatype: "json",
                 contentType: "application/json; charset-utf-8",
                 mtype: 'GET',
-                colNames: ['NATURE_DEPENSE', 'COMPTE_NUMERO', '  SIEGE_N_SIEGE', 'CODE_GROUPEMENT', 'UR_REPARTITION', 'CA_REPARTITION', 'TAUX_REPARTITION' ],
+                colNames: ['NATURE DEPENSE', 'COMPTE NUMERO', '  SIEGE ', 'TYPE GROUPEMENT', 'UR REPARTITION', 'CA REPARTITION', 'TAUX REPARTITION' ],
                 colModel: [
             { name: 'NATURE_DEPENSE', index: 'NATURE_DEPENSE', sorttype: "int", width: (pageWidth * (14 / 100)) },
             { name: 'COMPTE_NUMERO', index: 'COMPTE_NUMERO', sorttype: "int", width: (pageWidth * (14 / 100)) },
@@ -44,6 +44,9 @@
                 shrinkToFit: false,
                 pager: jQuery('#pager'),
                 height: '100%',
+                viewrecords: true,
+                recordtext: "Clés de répartion fixes {0} - {1} de {2}",
+                rownumbers: true,
               //  autowidht: true,
                 loadonce: true,
                 jsonReader: {

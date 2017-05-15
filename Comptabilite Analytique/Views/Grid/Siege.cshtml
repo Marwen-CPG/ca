@@ -26,22 +26,23 @@
                 datatype: "json",
                 contentType: "application/json; charset-utf-8",
                 mtype: 'GET',
-                colNames: ['NUMERO_SIEGE', 'LIBELLE_FR', '  LIBELLE_AR', 'NUMERO_SIEGE_COMPTABLE'  ],
+                colNames: ['SIEGE', 'LIBELLE ', 'NUMERO SIEGE COMPTABLE'/*, '  LIBELLE_AR'*/],
                 colModel: [
-            { name: 'NUMERO_SIEGE', index: 'NUMERO_SIEGE', sorttype: "int", width: (pageWidth * (25 / 100)) },
-            { name: 'LIBELLE_FR', index: 'LIBELLE_FR', width: (pageWidth * (25 / 100)) },
-            { name: 'LIBELLE_AR', index: 'LIBELLE_AR', width: (pageWidth * (25 / 100)) },
-              { name: 'NUMERO_SIEGE_COMPTABLE', index: 'NUMERO_SIEGE_COMPTABLE', sorttype: "int", width: (pageWidth * (25 / 100)) },
-        
+            { name: 'NUMERO_SIEGE', index: 'NUMERO_SIEGE', sorttype: "int", align: 'center', width: (pageWidth * (15 / 100)) },
+            { name: 'LIBELLE_FR', index: 'LIBELLE_FR', align: 'center', width: (pageWidth * (55 / 100)) },
+    { name: 'NUMERO_SIEGE_COMPTABLE', index: 'NUMERO_SIEGE_COMPTABLE', sorttype: "int", align: 'center', width: (pageWidth * (20 / 100)) },
 
-                ],
+     //    { name: 'LIBELLE_AR', index: 'LIBELLE_AR', width: (pageWidth * (25 / 100)) },
+  ],
                 rowNum: 25,
-
                 rowList: [10, 20,25 , 30, 40],
                 width: null,
                 shrinkToFit: false,
                 pager: jQuery('#pager'),
                 height: '100%',
+                viewrecords: true,
+                recordtext: " Sièges {0} - {1} de {2}",
+                rownumbers: true,
               //  autowidht: true,
                 loadonce: true,
                 jsonReader: {

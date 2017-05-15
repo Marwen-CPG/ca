@@ -24,8 +24,7 @@
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
     <a class="btn-success btn" href="@Url.Action("Ajoutert1", "Ecriture")"> <span class=" glyphicon glyphicon-plus"></span> Saisir une Ecriture analytique Type 1</a>
-    <a class="btn-success btn" href="@Url.Action("Ajouter", "Ecriture")"> <span class=" glyphicon glyphicon-plus"></span> Saisir une Ecriture analytique Type 2</a>
-
+    <a class="btn-success btn " href="@Url.Action("Ajouter", "Ecriture")"> <span class=" glyphicon glyphicon-plus"></span> Saisir une Ecriture analytique Type 2</a>
 </p>
 
 
@@ -190,7 +189,13 @@
     @Html.PagedListPager(Model, pageNumber => Url.Action("Index", new { pageNumber }))
 </div>
 @section scripts{
+    <script>
 
+        $('.txtString').on('blur', function () {
+            $('.linkAction').attr('href', '@Url.Action("Ajouter", "Ecriture", new { nbl = "----" })'.replace("----", $('.txtString').val()));
+        })
+
+    </script>
     <style>
         .search-form .form-group {
             float: right !important;

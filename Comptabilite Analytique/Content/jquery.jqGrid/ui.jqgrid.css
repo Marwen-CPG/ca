@@ -302,7 +302,7 @@ tr.ui-search-toolbar select {
     height: 25px;
     white-space: nowrap;
     overflow: hidden;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .ui-jqgrid .ui-pager-control {
@@ -341,7 +341,7 @@ tr.ui-search-toolbar select {
 }
 
 .ui-jqgrid .ui-pg-input {
-    height: 13px;
+    height: 25px;
     font-size: .8em;
     margin: 0;
 }
@@ -350,8 +350,8 @@ tr.ui-search-toolbar select {
     font-size: .10em;
     line-height: 18px;
     display: block;
-    height: 18px;
-    margin: 0;
+    height: 25px;
+    margin: 0em;
 }
 
 .ui-jqgrid .ui-separator {

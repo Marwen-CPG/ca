@@ -2,6 +2,125 @@
     ViewBag.Title = "Acceuill ";
 }
 
-<div class="jumbotron">
-   Systeme comptable
+ <hr /><hr />
+<div class="row col-lg-12">
+    <div class="col-lg-6 col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-calendar fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div ><h3>Mois Comptable</h3></div>
+                        
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <center><span class="huge">@ViewBag.MoisComptable</span></center>
+
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-calendar-o fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        
+                        <div><h3>Année Comptable</h3></div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="disabled">
+                <div class="panel-footer">
+                    <center><span class="huge">@ViewBag.AnneeComptable</span></center>    
+                   
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+  
+
+</div>
+<div class="row col-lg-12">
+
+    <div class="col-lg-6 col-md-12">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-clone fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div><h3>Période de chevauchement</h3></div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <center><span class="huge">  @ViewBag.Chevauchement </span></center>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-calendar-minus-o fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                       
+                        <div><h3>Mois Chevauchement</h3></div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <center><span class="huge">  @ViewBag.Moischevauchement </span></center>    
+                  
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+
+</div>
+<div class="row col-lg-12">
+    <div class= "col-lg-6 col-md-12">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-power-off fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+
+                        <div><h3>Etat de Système</h3></div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <center><span class="huge">  @ViewBag.EtatSystème </span></center>
+
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>

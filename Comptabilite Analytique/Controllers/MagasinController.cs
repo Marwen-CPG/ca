@@ -19,10 +19,10 @@ namespace Comptabilite_Analytique.Controllers
         // GET: Magasin
         public   ActionResult Index(string chercher, int? pageNumber)
         {
-            var mAGASIN = db.MAGASIN.Include(m => m.SIEGE);
+            var mAGASIN = db.MAGASIN.Include(m => m.SIEGE).OrderBy(m => m.CODE_MAGASIN);
  
             if (chercher != null && chercher.Length > 0)
-            { return View(mAGASIN.Where(s => s.LIBELLE_FR.ToLower().Contains(chercher.ToLower().Trim())).ToList().ToPagedList(pageNumber ?? 1, 10)); }
+            { return View(mAGASIN.Where(s => s.LIBELLE_FR.ToLower().Contains(chercher.ToLower().Trim())).ToList().ToPagedList(pageNumber ?? 1, 1000)); }
             else
             {
                 return View(mAGASIN.ToList().ToPagedList(pageNumber ?? 1, 10));
@@ -62,9 +62,9 @@ namespace Comptabilite_Analytique.Controllers
             if (ModelState.IsValid)
             {
 
-                var x = db.MAGASIN.Where(p => p.CODE_MAGASIN== mAGASIN.CODE_MAGASIN).ToList();
+                var x = db.MAGASIN.Where(p => p.CODE_MAGASIN== mAGASIN.CODE_MAGASIN && p.SIEGE_N_SIEGE == mAGASIN.SIEGE_N_SIEGE).ToList();
                         if ( x.Count != 0)
-                        { ViewBag.Message = " Une valeur existe deja pour ce code magasin ! Pensez a le modifier ";
+                        { ViewBag.Message = " Une valeur existe deja pour ce code magasin dans ce siege ! Pensez a le modifier ";
                         ViewBag.SIEGE_N_SIEGE = new SelectList(db.SIEGE, "NUMERO_SIEGE", "LIBELLE_FR", mAGASIN.SIEGE_N_SIEGE);
                         }
                 else

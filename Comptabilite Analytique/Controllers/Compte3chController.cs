@@ -19,9 +19,9 @@ namespace Comptabilite_Analytique.Controllers
         // GET: Compte3ch
         public ActionResult Index(string chercher, int? pageNumber)
         {
-            var cpt3 = db.COMPTE_ANA3CH.ToList();
+            var cpt3 = db.COMPTE_ANA3CH.OrderBy(c => c.NUMERO) ;
             if (chercher != null && chercher.Length > 0)
-            { return View(cpt3.Where(s => s.LIBELLE_FR.ToLower().Contains(chercher.ToLower().Trim())).ToList().ToPagedList(pageNumber ?? 1, 30)); }
+            { return View(cpt3.Where(s => s.LIBELLE_FR.ToLower().Contains(chercher.ToLower().Trim())).ToList().ToPagedList(pageNumber ?? 1, 1000)); }
             else
             {
                 return View(cpt3.ToList().ToPagedList(pageNumber ?? 1, 30));

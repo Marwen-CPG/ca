@@ -26,7 +26,7 @@
                 datatype: "json",
                 contentType: "application/json; charset-utf-8",
                 mtype: 'GET',
-                colNames: ['ORIGINE', 'GROUPE', 'DATE_ECRITURE', 'COMPTE NUMERO', 'SIEGE', 'NATURE_DEPENSE', 'MONTANT', 'LIBELLE_FR', 'LIBELLE_AR'],
+                colNames: ['ORIGINE', 'GROUPE', 'DATE ECRITURE', 'COMPTE NUMERO', 'SIEGE', 'NATURE DEPENSE', 'MONTANT', 'LIBELLE_FR'/*, 'LIBELLE_AR'*/],
                 colModel: [
             { name: 'ORIGINE', index: 'ORIGINE', sorttype: "int", width: (pageWidth * (11 / 100)) },
             { name: 'GROUPE', index: 'GROUPE', sorttype: "int", width: (pageWidth * (11 / 100)) },
@@ -35,8 +35,8 @@
               { name: 'SIEGE', index: 'SIEGE', sorttype: "int", width: (pageWidth * (11 / 100)) },
             { name: 'NATURE_DEPENSE', index: 'NATURE_DEPENSE', sorttype: "int", width: (pageWidth * (11 / 100)) },
             { name: 'MONTANT', index: 'MONTANT', width: (pageWidth * (11 / 100)) },
-            { name: 'LIBELLE_FR', index: 'LIBELLE_FR', width: (pageWidth * (11 / 100)) },
-              { name: 'LIBELLE_AR', index: 'LIBELLE_AR', width: (pageWidth * (11 / 100)) },
+            { name: 'LIBELLE_FR', index: 'LIBELLE_FR', width: (pageWidth * (22 / 100)) },
+          //    { name: 'LIBELLE_AR', index: 'LIBELLE_AR', width: (pageWidth * (11 / 100)) },
             
                 ],
                 rowNum: 25,
@@ -46,6 +46,9 @@
                 shrinkToFit: false,
                 pager: jQuery('#pager'),
                 height: '100%',
+                viewrecords: true,
+                recordtext: "Magasins {0} - {1} de {2}",
+                rownumbers: true,
               //  autowidht: true,
                 loadonce: true,
                 jsonReader: {

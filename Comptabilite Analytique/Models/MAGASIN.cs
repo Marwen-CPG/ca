@@ -10,12 +10,12 @@ namespace Comptabilite_Analytique.Models
     public partial class MAGASIN
     {
         [Required(ErrorMessage = "Veuillez renseigner ce champ!")]
-        [Key]
+        [Key, Column(Order = 0)]
         [StringLength(2, ErrorMessage = "Le Code Magasin doit comporter deux chiffres")]
         [RegularExpression(@"^\d{1,2}$", ErrorMessage = "Veuillez saisir un nombre decimal entre 01 et 99 !")]
         [Display(Name = "Code Magasin", Prompt = "Saisir le Code Magasin")]
         public string CODE_MAGASIN { get; set; }
-
+        [Key, Column(Order = 1)]
         [Required(ErrorMessage = "Veuillez renseigner ce champ!")]
         [StringLength(2, ErrorMessage = "Le numero du Siège doit comporter deux chiffres")]
         [Display(Name = "Siege", Prompt = "Choisir le siege du magasin")]

@@ -17,7 +17,7 @@
 <hr />
 <table id="list" class="col-md-12"></table>
 <div id="pager"></div>
-@section Scripts {
+@section Scripts { 
     <script type="text/javascript">
         $(document).ready(function myfunction() {
             var pageWidth = $("#list").parent().width() - 100;
@@ -27,12 +27,12 @@
                 datatype: "json",
                 contentType: "application/json; charset-utf-8",
                 mtype: 'GET',
-                colNames: ['CODE_ATELIER', '  LIBELLE_FR', 'LIBELLE_AR', 'SIEGE_N_SIEGE'],
+                colNames: ['CODE ATELIER', '  LIBELLE '/*, 'LIBELLE_AR'*/, 'SIEGE '],
                 colModel: [
-            { name: 'CODE_ATELIER', index: 'CODE_ATELIER', sorttype: "int", width: (pageWidth * (25 / 100)) },
-            { name: 'LIBELLE_FR', index: 'LIBELLE_FR', width: (pageWidth * (25 / 100)) },
-            { name: 'LIBELLE_AR', index: 'LIBELLE_AR', width: (pageWidth * (25 / 100)) },
-            { name: 'SIEGE_N_SIEGE', index: 'SIEGE_N_SIEGE', width: (pageWidth * (25 / 100)) },
+            { name: 'CODE_ATELIER', index: 'CODE_ATELIER',align: 'center', sorttype: "int", width: (pageWidth * (25 / 100)) },
+            { name: 'LIBELLE_FR', index: 'LIBELLE_FR', align: 'center', width: (pageWidth * (50 / 100)) },
+     //       { name: 'LIBELLE_AR', index: 'LIBELLE_AR', width: (pageWidth * (25 / 100)) },
+            { name: 'SIEGE_N_SIEGE', align: 'center' ,index: 'SIEGE_N_SIEGE', width: (pageWidth * (25 / 100)) },
                 ],
                 rowNum: 25,
 
@@ -41,6 +41,9 @@
                 shrinkToFit: false,
                 pager: jQuery('#pager'),
                 height: '100%',
+                viewrecords: true,
+                recordtext: "Ateliers {0} - {1} de {2}",
+                rownumbers: true,
               //  autowidht: true,
                 loadonce: true,
                 jsonReader: {

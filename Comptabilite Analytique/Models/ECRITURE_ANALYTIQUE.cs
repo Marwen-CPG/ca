@@ -5,6 +5,7 @@ namespace Comptabilite_Analytique.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     [Table("MARWENAMARA.ECRITURE_ANALYTIQUE")]
     public partial class ECRITURE_ANALYTIQUE
@@ -26,7 +27,9 @@ namespace Comptabilite_Analytique.Models
 
         [Required(ErrorMessage = "Veuillez renseigner ce champ !")]
         [StringLength(2, ErrorMessage = "Le numero du Siège doit comporter deux chiffres")]
+        [RegularExpression(@"^\d{2}$", ErrorMessage = "Veuillez saisir un nombre decimal composé de 2 chiffres  !")]
         [Display(Name = "Siège", Prompt = "Choisir le Siège")]
+        [Remote("ValidateSiege", "Ecriture")]
         public string SIEGE_N_SIEGE { get; set; }
 
 

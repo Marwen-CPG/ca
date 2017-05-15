@@ -18,9 +18,9 @@ namespace Comptabilite_Analytique.Controllers
         // GET: MethodeRegComp
         public ActionResult Index(string chercher, int? pageNumber)
         {
-            var mETHODE_REG_COMPAGNIE = db.METHODE_REG_COMPAGNIE.Include(m => m.COMPTE_ANA5CH);
+            var mETHODE_REG_COMPAGNIE = db.METHODE_REG_COMPAGNIE.Include(m => m.COMPTE_ANA5CH).OrderBy(m => m.METHODE_REG_COMPAGNIE1);
             if (chercher != null && chercher.Length > 0)
-            { return View(mETHODE_REG_COMPAGNIE.Where(s => s.SIEGE_N_SIEGE.ToLower().Contains(chercher.ToLower().Trim())).ToList().ToPagedList(pageNumber ?? 1, 10)); }
+            { return View(mETHODE_REG_COMPAGNIE.Where(s => s.SIEGE_N_SIEGE.ToLower().Contains(chercher.ToLower().Trim())).ToList().ToPagedList(pageNumber ?? 1, 1000)); }
             else
             {
                 return View(mETHODE_REG_COMPAGNIE.ToList().ToPagedList(pageNumber ?? 1, 30));

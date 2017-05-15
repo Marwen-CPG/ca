@@ -24,7 +24,7 @@ namespace Comptabilite_Analytique.Controllers
         [HttpGet]
         public JsonResult getCleRepFixe()
         {
-            var cLE_REPARTITION_FIXE = db.CLE_REPARTITION_FIXE ;
+            var cLE_REPARTITION_FIXE = db.CLE_REPARTITION_FIXE.OrderBy(c => c.COMPTE_NUMERO) ;
 
             var nb = cLE_REPARTITION_FIXE.ToList().Count;
             var l = cLE_REPARTITION_FIXE.ToList();
@@ -59,7 +59,7 @@ namespace Comptabilite_Analytique.Controllers
         [HttpGet]
         public JsonResult getCleRepVar()
         {
-            var cLE_REPARTITION_VAR = db.CLE_REPARTITION_VARIABLE;
+            var cLE_REPARTITION_VAR = db.CLE_REPARTITION_VARIABLE.OrderBy(c => c.COMPTE_NUMERO);
 
             var nb = cLE_REPARTITION_VAR.ToList().Count;
             var l = cLE_REPARTITION_VAR.ToList();
@@ -96,7 +96,7 @@ namespace Comptabilite_Analytique.Controllers
         [HttpGet]
         public JsonResult getSiege()
         {
-            var Siege = db.SIEGE;
+            var Siege = db.SIEGE.OrderBy(c => c.NUMERO_SIEGE);
 
             var nb = Siege.ToList().Count;
             var liste = Siege.ToList();
@@ -112,9 +112,10 @@ namespace Comptabilite_Analytique.Controllers
                       id = val.NUMERO_SIEGE,
                       cell = new string[] {   
                       val.NUMERO_SIEGE.ToString(),
-                      val.LIBELLE_FR.ToString(),   
+                      val.LIBELLE_FR.ToString(),
+                      val.NUMERO_SIEGE_COMPTABLE.ToString() ,
                      val.LIBELLE_AR == null ? "" :val.LIBELLE_AR.ToString()  ,   
-                   val.NUMERO_SIEGE_COMPTABLE.ToString() ,
+                   
                     
                }
                   }).ToArray()
@@ -131,7 +132,7 @@ namespace Comptabilite_Analytique.Controllers
         [HttpGet]
         public JsonResult getMagasin()
         {
-            var Magasin = db.MAGASIN;
+            var Magasin = db.MAGASIN.OrderBy(c => c.CODE_MAGASIN);
 
             var nb = Magasin.ToList().Count;
             var liste = Magasin.ToList();
@@ -165,7 +166,7 @@ namespace Comptabilite_Analytique.Controllers
         [HttpGet]
         public JsonResult getAtelier()
         {
-            var Atelier = db.ATELIER;
+            var Atelier = db.ATELIER.OrderBy(c => c.CODE_ATELIER);
 
             var nb = Atelier.ToList().Count;
             var liste = Atelier.ToList();
@@ -198,7 +199,7 @@ namespace Comptabilite_Analytique.Controllers
         [HttpGet]
         public JsonResult getPca3()
         {
-            var Pca3 = db.COMPTE_ANA3CH;
+            var Pca3 = db.COMPTE_ANA3CH.OrderBy(c => c.NUMERO);
 
             var nb = Pca3.ToList().Count;
             var liste = Pca3.ToList();
@@ -231,7 +232,7 @@ namespace Comptabilite_Analytique.Controllers
         [HttpGet]
         public JsonResult getPca4()
         {
-            var Pca4 = db.COMPTE_ANA4CH;
+            var Pca4 = db.COMPTE_ANA4CH.OrderBy(c => c.NUMERO);
 
             var nb = Pca4.ToList().Count;
             var liste = Pca4.ToList();
@@ -264,7 +265,7 @@ namespace Comptabilite_Analytique.Controllers
         [HttpGet]
         public JsonResult getPca5()
         {
-            var Pca5 = db.COMPTE_ANA5CH;
+            var Pca5 = db.COMPTE_ANA5CH.OrderBy(c => c.NUMERO);
 
             var nb = Pca5.ToList().Count;
             var liste = Pca5.ToList();
@@ -298,7 +299,7 @@ namespace Comptabilite_Analytique.Controllers
         [HttpGet]
         public JsonResult getNd()
         {
-            var Nd = db.NATURE_DEPENSE;
+            var Nd = db.NATURE_DEPENSE.OrderBy(c => c.NUMERO);
 
             var nb = Nd.ToList().Count;
             var liste = Nd.ToList();
@@ -333,7 +334,7 @@ namespace Comptabilite_Analytique.Controllers
         [HttpGet]
         public JsonResult getNdr()
         {
-            var Ndr = db.NATURE_DEPENSE_REG;
+            var Ndr = db.NATURE_DEPENSE_REG.OrderBy(c => c.NUMERO);
 
             var nb = Ndr.ToList().Count;
             var liste = Ndr.ToList();
@@ -364,7 +365,7 @@ namespace Comptabilite_Analytique.Controllers
         [HttpGet]
         public JsonResult getNds()
         {
-            var Nds = db.NATURE_DEPENSE_SUBVENTION;
+            var Nds = db.NATURE_DEPENSE_SUBVENTION.OrderBy(c => c.NUMERO);
 
             var nb = Nds.ToList().Count;
             var liste = Nds.ToList();
@@ -397,7 +398,7 @@ namespace Comptabilite_Analytique.Controllers
         [HttpGet]
         public JsonResult getMrtc()
         {
-            var Mrtc = db.METHODE_REG_COMPAGNIE;
+            var Mrtc = db.METHODE_REG_COMPAGNIE.OrderBy(c => c.METHODE_REG_COMPAGNIE1);
 
             var nb = Mrtc.ToList().Count;
             var liste = Mrtc.ToList();
@@ -431,7 +432,7 @@ namespace Comptabilite_Analytique.Controllers
         [HttpGet]
         public JsonResult getMrts()
         {
-            var Mrts = db.METHODE_REG_SIEGE;
+            var Mrts = db.METHODE_REG_SIEGE.OrderBy(c => c.METHODE_REG_SIEGE1);
 
             var nb = Mrts.ToList().Count;
             var liste = Mrts.ToList();
@@ -465,7 +466,7 @@ namespace Comptabilite_Analytique.Controllers
         [HttpGet]
         public JsonResult getecriture()
         {
-            var ecriture = db.ECRITURE_ANALYTIQUE;
+            var ecriture = db.ECRITURE_ANALYTIQUE.OrderBy(c => c.NUMERO_ECRITURE);
 
             var nb = ecriture.ToList().Count;
             var liste = ecriture.ToList();

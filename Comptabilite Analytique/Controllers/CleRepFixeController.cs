@@ -19,7 +19,7 @@ namespace Comptabilite_Analytique.Controllers
         // GET: CleRepFixe
         public ActionResult Index(string chercher, int? pageNumber)
         {
-            var cLE_REPARTITION_FIXE = db.CLE_REPARTITION_FIXE.Include(c => c.COMPTE_ANA5CH).Include(c => c.COMPTE_ANA5CH1).Include(c => c.NATURE_DEPENSE1);
+            var cLE_REPARTITION_FIXE = db.CLE_REPARTITION_FIXE.Include(c => c.COMPTE_ANA5CH).Include(c => c.COMPTE_ANA5CH1).Include(c => c.NATURE_DEPENSE1).OrderBy(c => c.COMPTE_NUMERO).OrderBy(c => c.SIEGE_N_SIEGE);
             if (chercher != null && chercher.Length > 0)
             { return View(cLE_REPARTITION_FIXE.Where(s => s.NATURE_DEPENSE.ToLower().Contains(chercher.ToLower().Trim())).ToList().ToPagedList(pageNumber ?? 1, 1000)); }
             else

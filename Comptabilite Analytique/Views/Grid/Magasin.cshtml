@@ -12,7 +12,12 @@
         <li><a href="@Url.Action("Index", "Magasin")">Tableau <span class="glyphicon glyphicon-th-list"></span></a></li>
         <li><a href="@Url.Action("Magasin", "Grid")">Grille &nbsp; &nbsp; <span class="glyphicon  glyphicon-list-alt"></span></a></li>
     </ul>
-</div> <br />
+</div>
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a class="btn-success btn" href="@Url.Action("Create", "MAGASIN")"> <span class=" glyphicon glyphicon-plus"></span> Ajouter un magasin</a>
+
+</p>  
 <hr />
 <table id="list" class="col-md-12"></table>
 <div id="pager"></div>
@@ -26,20 +31,22 @@
                 datatype: "json",
                 contentType: "application/json; charset-utf-8",
                 mtype: 'GET',
-                colNames: ['CODE_MAGASIN', 'SIEGE_N_SIEGE', '  LIBELLE_FR', 'LIBELLE_AR'],
+                colNames: ['CODE MAGASIN', 'SIEGE ', '  LIBELLE '/*, 'LIBELLE_AR'*/],
                 colModel: [
-            { name: 'CODE_MAGASIN', index: 'CODE_MAGASIN', sorttype: "int", width: (pageWidth * (25 / 100)) },
-            { name: 'SIEGE_N_SIEGE', index: 'SIEGE_N_SIEGE', width: (pageWidth * (25 / 100)) },
-            { name: 'LIBELLE_FR', index: 'LIBELLE_FR', width: (pageWidth * (25 / 100)) },
-            { name: 'LIBELLE_AR', index: 'LIBELLE_AR', width: (pageWidth * (25 / 100)) },
+            { name: 'CODE_MAGASIN', index: 'CODE_MAGASIN', sorttype: "int", align: 'center', width: (pageWidth * (25 / 100)) },
+            { name: 'SIEGE_N_SIEGE', index: 'SIEGE_N_SIEGE', align: 'center', width: (pageWidth * (25 / 100)) },
+            { name: 'LIBELLE_FR', index: 'LIBELLE_FR', align: 'center', width: (pageWidth * (50 / 100)) },
+         //   { name: 'LIBELLE_AR', index: 'LIBELLE_AR', width: (pageWidth * (25 / 100)) },
                 ],
                 rowNum: 25,
-
                 rowList: [10, 20,25 , 30, 40],
                 width: null,
                 shrinkToFit: false,
                 pager: jQuery('#pager'),
                 height: '100%',
+                viewrecords: true,
+                recordtext: "Magasins {0} - {1} de {2}",
+                rownumbers: true,
               //  autowidht: true,
                 loadonce: true,
                 jsonReader: {
@@ -47,7 +54,7 @@
                     page: "page",
                     total: "total",
                     records: "records",
-
+                   
                 },
 
             });

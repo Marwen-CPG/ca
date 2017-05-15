@@ -195,6 +195,7 @@
     <Compile Include="Controllers\NatureDepenseController.cs" />
     <Compile Include="Controllers\NatureDepenseRegController.cs" />
     <Compile Include="Controllers\NatureDepenseSubController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SiegeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -540,6 +541,9 @@
     <Content Include="Views\EtatGlobale\Details.cshtml" />
     <Content Include="Views\EtatGlobale\Edit.cshtml" />
     <Content Include="Views\EtatGlobale\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Ecriture.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
